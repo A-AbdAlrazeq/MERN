@@ -1,0 +1,14 @@
+.app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+h1,
+h2 {
+  padding: 5px;
+}
