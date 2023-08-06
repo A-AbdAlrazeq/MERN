@@ -1,9 +1,11 @@
 import PersonCard from "./components/PersonCard";
 import "./App.css";
+import Form from "./components/form";
+import "bootstrap/dist/css/bootstrap.css";
 
 function App() {
   return (
-    <div className="App">
+    /*  <div className="App">
       <PersonCard
         firstName={"Abood"}
         lastName={"Razeq"}
@@ -22,6 +24,9 @@ function App() {
         age={44}
         hairColor={"brown"}
       />
+    </div> */
+    <div className="App">
+      <Form />
     </div>
   );
 }
