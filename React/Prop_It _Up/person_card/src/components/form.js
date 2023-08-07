@@ -8,22 +8,73 @@ const UserForm = (props) => {
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
 
+  const [firstNameError, setFirstNameError] = useState("");
+  const [lastNameError, setLastNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confPasswordError, setConfPasswordError] = useState("");
+
+  const validateFirstName = () => {
+    if (firstName.trim() && firstName.length < 2) {
+      setFirstNameError("First Name must be at least 2 characters");
+    } else {
+      setFirstNameError("");
+    }
+  };
+
+  const validateLastName = () => {
+    if (lastName.trim() && lastName.length < 2) {
+      setLastNameError("Last Name must be at least 2 characters");
+    } else {
+      setLastNameError("");
+    }
+  };
+
+  const validateEmail = () => {
+    if (email.trim() && email.length < 5) {
+      setEmailError("Email must be at least 5 characters");
+    } else {
+      setEmailError("");
+    }
+  };
+
+  const validatePassword = () => {
+    if (password.trim() && password.length < 8) {
+      setPasswordError("Password must be at least 8 characters");
+    } else {
+      setPasswordError("");
+    }
+  };
+
+  const validateConfPassword = () => {
+    if (confPassword.trim() && password !== confPassword) {
+      setConfPasswordError("Passwords do not match");
+    } else {
+      setConfPasswordError("");
+    }
+  };
   const createUser = (e) => {
     e.preventDefault();
 
-    const newUser = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      password: password,
-      confPassword: confPassword,
-    };
-    console.log(newUser);
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    setPassword("");
-    setConfPassword("");
+    validateFirstName();
+    validateLastName();
+    validateEmail();
+    validatePassword();
+    validateConfPassword();
+    if (
+      firstName &&
+      lastName &&
+      email &&
+      password &&
+      confPassword &&
+      password === confPassword
+    ) {
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPassword("");
+      setConfPassword("");
+    }
   };
 
   return (
@@ -36,7 +87,9 @@ const UserForm = (props) => {
             type="text"
             class="form-control"
             onChange={(e) => setFirstName(e.target.value)}
+            onBlur={validateFirstName}
           />
+          {firstNameError && <p>{firstNameError}</p>}
         </div>
         <div class="form-group">
           <label htmlFor="last_name">Last Name:</label>
@@ -45,7 +98,9 @@ const UserForm = (props) => {
             type="text"
             class="form-control"
             onChange={(e) => setLastName(e.target.value)}
+            onBlur={validateLastName}
           />
+          {lastNameError && <p>{lastNameError}</p>}
         </div>
         <div class="form-group">
           <label htmlFor="email">email Address:</label>
@@ -54,7 +109,9 @@ const UserForm = (props) => {
             type="email"
             class="form-control"
             onChange={(e) => setEmail(e.target.value)}
+            onBlur={validateEmail}
           />
+          {emailError && <p>{emailError}</p>}
         </div>
         <div class="form-group">
           <label htmlFor="password">Password:</label>
@@ -63,7 +120,9 @@ const UserForm = (props) => {
             type="password"
             class="form-control"
             onChange={(e) => setPassword(e.target.value)}
+            onBlur={validatePassword}
           />
+          {passwordError && <p>{passwordError}</p>}
         </div>
         <div class="form-group">
           <label htmlFor="con_password">Confirm Password:</label>
@@ -72,8 +131,11 @@ const UserForm = (props) => {
             type="password"
             class="form-control"
             onChange={(e) => setConfPassword(e.target.value)}
+            onBlur={validateConfPassword}
           />
+          {confPasswordError && <p>{confPasswordError}</p>}
         </div>
+        <input className="btn btn-success m-1" type="submit" value="Register" />
       </form>
       <div>
         <h2>Form Data:</h2>

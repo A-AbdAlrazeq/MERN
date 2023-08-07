@@ -1,4 +1,4 @@
-import PersonCard from "./components/PersonCard";
+/* import PersonCard from "./components/PersonCard"; */
 import "./App.css";
 import Form from "./components/form";
 import "bootstrap/dist/css/bootstrap.css";
