@@ -1,0 +1,40 @@
+/* CSS for Tabs component */
+.tabs-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.tabs-header {
+  display: flex;
+}
+
+.tab-header {
+  cursor: pointer;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  margin-right: 5px;
+  background-color: #f0f0f0;
+  border-radius: 5px 5px 0 0;
+}
+
+.tab-header.active {
+  background-color: black;
+  border-bottom: 1px solid #fff;
+  color: white;
+}
+
+.tabs-content {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 0 0 5px 5px;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
