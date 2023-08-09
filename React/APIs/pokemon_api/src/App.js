@@ -1,10 +1,10 @@
 import "./App.css";
-import Fetch_Pokemon from "./components/fetch_pokemon";
-
+import FetchPokemon from "./components/fetch_pokemon";
+import React from "react";
 function App() {
   return (
     <div className="App">
-      <Fetch_Pokemon />
+      <FetchPokemon />
     </div>
   );
 }

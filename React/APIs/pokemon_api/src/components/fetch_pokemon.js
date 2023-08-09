@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-const Fetch_Pokemon = () => {
+const FetchPokemon = () => {
   const [pokemonList, setPokemonList] = useState([]);
-  useEffect(() => {
+  /* useEffect(() => {
     fetch("https://pokeapi.co/api/v2/pokemon?limit=807")
       .then((res) => res.json())
       .then((data) => setPokemonList(data.results));
+  }, []); */
+
+  useEffect(() => {
+    axios
+      .get("https://pokeapi.co/api/v2/pokemon?limit=807")
+      .then((response) => {
+        setPokemonList(response.data.results);
+      });
   }, []);
   return (
     <div className="App">
@@ -18,4 +27,4 @@ const Fetch_Pokemon = () => {
     </div>
   );
 };
-export default Fetch_Pokemon;
+export default FetchPokemon;
