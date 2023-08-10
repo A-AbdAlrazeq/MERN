@@ -1,11 +1,33 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-const ColoredWordDisplay = () => {
-  const { word, textColor, bgColor } = useParams();
-  const styles = {
-    color: textColor,
-    backgroundColor: bgColor,
-  };
-  return <h1 style={styles}>{word}</h1>;
+
+const ParamsComponent = (props) => {
+  const { word, color, bgCol } = useParams();
+
+  return (
+    <div>
+      {
+        //This method returns a boolean based on whether the argument is a number
+        isNaN(word) ? ( //If word param isn't a number:
+          <p
+            style={
+              //If color param exists, then style this element with the values passed in
+              color && !bgCol
+                ? { color: color }
+                : color && bgCol
+                ? { color: color, background: bgCol }
+                : null
+            }
+          >
+            This is a word: {word}
+          </p>
+        ) : (
+          //If the word param IS a number:
+          <p>This is a number: {word}</p>
+        )
+      }
+    </div>
+  );
 };
-export default ColoredWordDisplay;
+
+export default ParamsComponent;
