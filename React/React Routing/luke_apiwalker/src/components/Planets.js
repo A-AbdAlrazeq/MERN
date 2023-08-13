@@ -4,43 +4,45 @@ import { useParams } from "react-router-dom";
 
 const Planets = () => {
   const { id } = useParams();
-  console.log(id);
-  const [apiData, setApiData] = useState({});
+  const [planetData, setPlanetData] = useState({});
   const [isError, setIsError] = useState(false);
+
   useEffect(() => {
-    axios
-      .get(`https://swapi.dev/api/planets/${id}`)
-      .then((response) => {
+    const fetchPlanetData = async () => {
+      try {
+        const response = await axios.get(`https://swapi.dev/api/planets/${id}`);
+        setPlanetData(response.data);
         setIsError(false);
-        console.log(response.data);
-        setApiData(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
+      } catch (error) {
+        console.log(error);
         setIsError(true);
-      });
+      }
+    };
+
+    fetchPlanetData();
   }, [id]);
-  if (!isError) {
-    return (
-      <div>
-        <h1>{apiData.name}</h1>
-        <p>Climate: {apiData.climate}</p>
-        <p>Terrain: {apiData.terrain}</p>
-        <p>Surface_Water: {apiData.surface_water}</p>
-        <p>Population: {apiData.population}</p>
-      </div>
-    );
-  } else {
-    return (
-      <>
-        <img
-          src="https://api.time.com/wp-content/uploads/2015/12/star-wars-episode-iii-revenge-of-the-sith-obi-wan.jpg?w=800&quality=85"
-          alt=""
-        />
-        <h3>These aren't the droids you're looking for</h3>
-      </>
-    );
-  }
+
+  return (
+    <div>
+      {isError ? (
+        <>
+          <img
+            src="https://api.time.com/wp-content/uploads/2015/12/star-wars-episode-iii-revenge-of-the-sith-obi-wan.jpg?w=800&quality=85"
+            alt=""
+          />
+          <h3>These aren't the droids you're looking for</h3>
+        </>
+      ) : (
+        <>
+          <h1>{planetData.name}</h1>
+          <p>Climate: {planetData.climate}</p>
+          <p>Terrain: {planetData.terrain}</p>
+          <p>Surface Water: {planetData.surface_water}</p>
+          <p>Population: {planetData.population}</p>
+        </>
+      )}
+    </div>
+  );
 };
 
 export default Planets;
