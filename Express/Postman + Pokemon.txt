@@ -1,0 +1,132 @@
+1- GET => https://pokeapi.co/api/v2/pokemon/pikachu
+"abilities": [
+        {
+            "ability": {
+                "name": "static",
+                "url": "https://pokeapi.co/api/v2/ability/9/"
+            },
+            "is_hidden": false,
+            "slot": 1
+        },
+        {
+            "ability": {
+                "name": "lightning-rod",
+                "url": "https://pokeapi.co/api/v2/ability/31/"
+            },
+            "is_hidden": true,
+            "slot": 3
+        }
+    ],
+    "base_experience": 112,
+    "forms": [
+        {
+            "name": "pikachu",
+            "url": "https://pokeapi.co/api/v2/pokemon-form/25/"
+        }
+    ],
+
+    2- GET => https://pokeapi.co/api/v2/pokemon/jigglypuff
+
+    "abilities": [
+        {
+            "ability": {
+                "name": "cute-charm",
+                "url": "https://pokeapi.co/api/v2/ability/56/"
+            },
+            "is_hidden": false,
+            "slot": 1
+        },
+        {
+            "ability": {
+                "name": "competitive",
+                "url": "https://pokeapi.co/api/v2/ability/172/"
+            },
+            "is_hidden": false,
+            "slot": 2
+        },
+        {
+            "ability": {
+                "name": "friend-guard",
+                "url": "https://pokeapi.co/api/v2/ability/132/"
+            },
+            "is_hidden": true,
+            "slot": 3
+        }
+    ],
+
+    3- GET => https://pokeapi.co/api/v2/pokemon/130
+
+    "abilities": [
+        {
+            "ability": {
+                "name": "intimidate",
+                "url": "https://pokeapi.co/api/v2/ability/22/"
+            },
+            "is_hidden": false,
+            "slot": 1
+        },
+        {
+            "ability": {
+                "name": "moxie",
+                "url": "https://pokeapi.co/api/v2/ability/153/"
+            },
+            "is_hidden": true,
+            "slot": 3
+        }
+    ],
+    "base_experience": 189,
+    "forms": [
+        {
+            "name": "gyarados",
+            "url": "https://pokeapi.co/api/v2/pokemon-form/130/"
+        }
+    ],
+
+    4- GET => https://pokeapi.co/api/v2/pokemon/gengar
+
+    "abilities": [
+        {
+            "ability": {
+                "name": "cursed-body",
+                "url": "https://pokeapi.co/api/v2/ability/130/"
+            },
+            "is_hidden": false,
+            "slot": 1
+        }
+    ],
+    "base_experience": 250,
+    "forms": [
+        {
+            "name": "gengar",
+            "url": "https://pokeapi.co/api/v2/pokemon-form/94/"
+        }
+    ],
+
+    5- GET => https://pokeapi.co/api/v2/pokemon/77
+
+    "abilities": [
+        {
+            "ability": {
+                "name": "run-away",
+                "url": "https://pokeapi.co/api/v2/ability/50/"
+            },
+            "is_hidden": false,
+            "slot": 1
+        },
+        {
+            "ability": {
+                "name": "flash-fire",
+                "url": "https://pokeapi.co/api/v2/ability/18/"
+            },
+            "is_hidden": false,
+            "slot": 2
+        },
+        {
+            "ability": {
+                "name": "flame-body",
+                "url": "https://pokeapi.co/api/v2/ability/49/"
+            },
+            "is_hidden": true,
+            "slot": 3
+        }
+    ],
