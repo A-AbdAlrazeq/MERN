@@ -1,0 +1,47 @@
+1- GET=> http://localhost:3000/api/users/new
+
+{
+    "password": "eFXgMcNv_R0ohQf",
+    "email": "Franz_Schamberger28@hotmail.com",
+    "phoneNumber": "(442) 358-6442 x061",
+    "lastName": "Marks",
+    "firstName": "Santiago",
+    "_id": "03500ec0-f771-4d37-99b4-14af48e3fc3d"
+}
+
+2- GET=> http://localhost:3000/api/companies/new
+
+{
+    "_id": 8268584675442688,
+    "name": "Craig Cartwright",
+    "address": {
+        "street": "Karl Court",
+        "city": "Delaneyside",
+        "state": "Louisiana",
+        "zipCode": "66862-2072",
+        "country": "San Marino"
+    }
+}
+
+3- GET=> http://localhost:3000/api/user/company
+{
+    "user": {
+        "password": "kjO2q8XdGB2zUii",
+        "email": "Gayle.Moen@gmail.com",
+        "phoneNumber": "(966) 609-0730 x173",
+        "lastName": "Rempel",
+        "firstName": "Abby",
+        "_id": "fcff3467-bb90-4e5c-9312-89b66fa87bc0"
+    },
+    "company": {
+        "_id": 5029939422167040,
+        "name": "Gilbert Walker",
+        "address": {
+            "street": "Arne Mills",
+            "city": "Miami Gardens",
+            "state": "Georgia",
+            "zipCode": "35062-4246",
+            "country": "Sudan"
+        }
+    }
+}
