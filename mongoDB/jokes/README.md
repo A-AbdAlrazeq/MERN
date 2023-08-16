@@ -28,3 +28,8 @@ You may also see any lint errors in the terminal.
 - partially update an existing joke with a matching id
 
  ![Screenshot (71)](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/40955bfc-f431-4991-8d2d-eaa8e3891670)
+ - remove a joke with a matching id
+   ![Screenshot (72)](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/17e6b5a0-3397-41a5-8d4e-85c50e3895ec)
+
+   
+   
