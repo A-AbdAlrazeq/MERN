@@ -32,9 +32,10 @@ You may also see any lint errors in the terminal.
    
  ![Screenshot (72)](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/17e6b5a0-3397-41a5-8d4e-85c50e3895ec)
  - get a random joke
-![Screenshot (74)](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/c86864db-6cfb-4663-b7cf-0297795ca5b9)
+   
+ ![Screenshot (74)](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/c86864db-6cfb-4663-b7cf-0297795ca5b9)
 
-![Screenshot (73)](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/292c202f-e79a-4516-bfb8-1db02fe7a829)
+ ![Screenshot (73)](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/292c202f-e79a-4516-bfb8-1db02fe7a829)
 
    
    
