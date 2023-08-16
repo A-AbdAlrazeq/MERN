@@ -15,7 +15,7 @@ module.exports = (app) => {
   app.post("/api/jokes", jokesController.createJoke);
 
   // UPDATE a joke
-  app.put("/api/jokes/:id", jokesController.updateJoke);
+  app.patch("/api/jokes/:id", jokesController.updateJoke);
 
   // DELETE a joke
   app.delete("/api/jokes/:id", jokesController.deleteJoke);
