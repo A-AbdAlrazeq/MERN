@@ -13,9 +13,10 @@ Runs the app in the development mode.\
 
 The server will reload when you make changes.\
 You may also see any lint errors in the terminal.
-#Test using Postman
 
-- get all jokes in DB
+### Test using Postman
+![Screenshot (81)](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/08108a88-bdf5-413d-a4fb-cdb2bff32b6d)
+
 
 ### `npm run start`
 
