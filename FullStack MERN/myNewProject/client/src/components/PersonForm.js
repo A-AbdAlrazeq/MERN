@@ -1,22 +1,24 @@
 import React, { useState } from "react";
 import axios from "axios";
-const PersonForm = () => {
-  //keep track of what is being typed via useState hook
+const PersonForm = (props) => {
+  const { people, setPeople } = props; //this is new
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  //handler when the form is submitted
   const onSubmitHandler = (e) => {
-    //prevent default behavior of the submit
     e.preventDefault();
-    //make a post request to create a new person
     axios
       .post("http://localhost:8000/api/people", {
-        firstName, // this is shortcut syntax for firstName: firstName,
-        lastName, // this is shortcut syntax for lastName: lastName
+        firstName,
+        lastName,
       })
       .then((res) => {
-        console.log(res); // always console log to get used to tracking your data!
+        console.log(res);
         console.log(res.data);
+        // we will update the lifted state of our people array
+        //    to include the current value in state plus the single
+        //    new object created and returned from our post request.
+        // or i can add [people] inside useEffect when make post
+        setPeople([...people, res.data]); //this is new
       })
       .catch((err) => console.log(err));
   };
