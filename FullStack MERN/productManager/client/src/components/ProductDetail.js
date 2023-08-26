@@ -1,15 +1,24 @@
 // ProductDetail.js
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const ProductDetail = (props) => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
+  const navigate = useNavigate(); // Initialize the useNavigate hook
 
   useEffect(() => {
     fetchProduct();
   }, [id]);
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8000/api/products/${id}`);
+      navigate("/"); // Redirect to main view after deletion
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
+  };
 
   const fetchProduct = async () => {
     try {
@@ -28,10 +37,13 @@ const ProductDetail = (props) => {
 
   return (
     <div>
+      <button onClick={() => navigate(`/`)}>Home</button>
       <h2>Product Details</h2>
       <p>Title: {product.title}</p>
       <p>Price: {product.price}</p>
       <p>Description: {product.description}</p>
+      <button onClick={() => handleDelete(product._id)}>Delete</button>
+      <button onClick={() => navigate(`/edit/${id}`)}>Edit</button>
     </div>
   );
 };

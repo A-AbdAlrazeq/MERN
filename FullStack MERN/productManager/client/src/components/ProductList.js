@@ -10,6 +10,17 @@ const ProductList = (props) => {
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product]);
 
+  const handleDelete = async (productId) => {
+    try {
+      await axios.delete(`http://localhost:8000/api/products/${productId}`);
+      //fetchProducts(); Refresh the list after deletion
+      // Update products state by removing the deleted product
+      setProduct(product.filter((product) => product._id !== productId));
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
+  };
+
   const fetchProducts = async () => {
     try {
       const response = await axios.get("http://localhost:8000/api/products");
@@ -27,6 +38,7 @@ const ProductList = (props) => {
           <div key={product._id}>
             {" "}
             <Link to={`/products/${product._id}`}>{product.title}</Link>
+            <button onClick={() => handleDelete(product._id)}>Delete</button>
           </div>
         );
       })}

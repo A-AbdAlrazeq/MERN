@@ -31,8 +31,36 @@ const getProductDetails = async (req, res) => {
   }
 };
 
+const editProduct = async (req, res) => {
+  const productId = req.params.id;
+  const updatedProductData = req.body;
+
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(
+      productId,
+      updatedProductData,
+      { new: true }
+    );
+    res.json(updatedProduct);
+  } catch (error) {
+    res.status(500).json({ error: "Error updating product" });
+  }
+};
+
+const deleteProduct = async (req, res) => {
+  const productId = req.params.id;
+
+  try {
+    await Product.findByIdAndDelete(productId);
+    res.json({ message: "Product deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ error: "Error deleting product" });
+  }
+};
 module.exports = {
   createProduct,
   getAllProducts,
   getProductDetails,
+  editProduct,
+  deleteProduct,
 };

@@ -6,13 +6,20 @@ const PersonList = (props) => {
     via props by the parent component (app.js) to our child 
     component (PersonList.js). Now we can easily use the getter 
     and setter without having to write props.getter or props.setter every time: */
-  const { people, setPeople } = props;
+  const { removeFromDom, people, setPeople } = props;
+  const deletePerson = (personId) => {
+    axios
+      .delete("http://localhost:8000/api/people/" + personId)
+      .then((res) => {
+        removeFromDom(personId);
+      })
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
     axios
       .get("http://localhost:8000/api/people")
       .then((res) => {
-        console.log(res.data);
         setPeople(res.data);
       })
       .catch((err) => {
@@ -31,6 +38,14 @@ const PersonList = (props) => {
             refactor. */}
             <p>
               {person.firstName} {person.lastName}
+              <Link to={"/people/edit/" + person._id}>Edit</Link>
+              <button
+                onClick={(e) => {
+                  deletePerson(person._id);
+                }}
+              >
+                Delete
+              </button>
             </p>
             {/* Look to Code Block 3. That :id gets its value right here. */
             /*
