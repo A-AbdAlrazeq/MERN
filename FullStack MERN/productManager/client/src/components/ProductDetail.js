@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import DeleteButton from "./DeleteButton";
 
-const ProductDetail = (props) => {
+const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   const navigate = useNavigate(); // Initialize the useNavigate hook
@@ -15,7 +15,7 @@ const ProductDetail = (props) => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:8000/api/products/${id}`);
-      navigate("/"); // Redirect to main view after deletion
+      navigate("/");
     } catch (error) {
       console.error("Error deleting product:", error);
     }

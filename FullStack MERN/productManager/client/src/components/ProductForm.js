@@ -1,11 +1,13 @@
 // ProductForm.js
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const ProductForm = ({ productToUpdate, onSubmit, addProductToList }) => {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (productToUpdate) {
@@ -25,21 +27,16 @@ const ProductForm = ({ productToUpdate, onSubmit, addProductToList }) => {
           `http://localhost:8000/api/products/${productToUpdate._id}`,
           formData
         );
+        navigate(`/products/${productToUpdate._id}`);
       } else {
         const response = await axios.post(
           "http://localhost:8000/api/products",
           formData
         );
         addProductToList(response.data);
-        console.log("Product created:", response.data);
-        // Clear the form fields
         setTitle("");
         setPrice("");
         setDescription("");
-      }
-
-      if (onSubmit) {
-        onSubmit();
       }
     } catch (error) {
       console.error("Error:", error);
