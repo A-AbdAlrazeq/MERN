@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import DeleteButton from "./DeleteButton";
 
 const ProductDetail = (props) => {
   const { id } = useParams();
@@ -42,7 +43,7 @@ const ProductDetail = (props) => {
       <p>Title: {product.title}</p>
       <p>Price: {product.price}</p>
       <p>Description: {product.description}</p>
-      <button onClick={() => handleDelete(product._id)}>Delete</button>
+      <DeleteButton onClick={() => handleDelete(product._id)} />
       <button onClick={() => navigate(`/edit/${id}`)}>Edit</button>
     </div>
   );

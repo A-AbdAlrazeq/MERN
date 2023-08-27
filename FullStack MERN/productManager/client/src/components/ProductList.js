@@ -1,14 +1,9 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import DeleteButton from "./DeleteButton";
 const ProductList = (props) => {
   const { product, setProduct } = props;
-
-  useEffect(() => {
-    fetchProducts();
-    //to remove the warning about dependency
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [product]);
 
   const handleDelete = async (productId) => {
     try {
@@ -21,24 +16,15 @@ const ProductList = (props) => {
     }
   };
 
-  const fetchProducts = async () => {
-    try {
-      const response = await axios.get("http://localhost:8000/api/products");
-      setProduct(response.data);
-    } catch (error) {
-      console.error("Error fetching products:", error);
-    }
-  };
-
   return (
     <div>
       <h2>All Product</h2>
-      {product.map((product, index) => {
+      {product.map((productItem, index) => {
         return (
-          <div key={product._id}>
+          <div key={productItem._id}>
             {" "}
-            <Link to={`/products/${product._id}`}>{product.title}</Link>
-            <button onClick={() => handleDelete(product._id)}>Delete</button>
+            <Link to={`/products/${productItem._id}`}>{productItem.title}</Link>
+            <DeleteButton onClick={() => handleDelete(productItem._id)} />
           </div>
         );
       })}
