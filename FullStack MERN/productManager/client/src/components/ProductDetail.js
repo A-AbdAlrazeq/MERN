@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import DeleteButton from "./DeleteButton";
+import Button from "@mui/material/Button";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -38,13 +39,17 @@ const ProductDetail = () => {
 
   return (
     <div>
-      <button onClick={() => navigate(`/`)}>Home</button>
+      <Button color="secondary" onClick={() => navigate(`/`)}>
+        Home
+      </Button>
       <h2>Product Details</h2>
       <p>Title: {product.title}</p>
       <p>Price: {product.price}</p>
       <p>Description: {product.description}</p>
       <DeleteButton onClick={() => handleDelete(product._id)} />
-      <button onClick={() => navigate(`/edit/${id}`)}>Edit</button>
+      <Button color="success" onClick={() => navigate(`/edit/${id}`)}>
+        Edit
+      </Button>
     </div>
   );
 };

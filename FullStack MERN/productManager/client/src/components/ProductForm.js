@@ -1,7 +1,9 @@
-// ProductForm.js
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
 
 const ProductForm = ({ productToUpdate, onSubmit, addProductToList }) => {
   const [title, setTitle] = useState("");
@@ -46,33 +48,46 @@ const ProductForm = ({ productToUpdate, onSubmit, addProductToList }) => {
   return (
     <div>
       <h2>{productToUpdate ? "Edit" : "Create"} Product</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Title:</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Price:</label>
-          <input
-            type="number"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Description:</label>
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </div>
-        <button type="submit">
+      <form style={{ padding: "10px" }} onSubmit={handleSubmit}>
+        <Box
+          component="form"
+          sx={{
+            "& > :not(style)": { m: 1, width: "25ch" },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          {" "}
+          <div>
+            <TextField
+              label="Title"
+              variant="outlined"
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </div>
+          <div>
+            <TextField
+              label="Price"
+              variant="outlined"
+              type="number"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </div>
+          <div>
+            <TextField
+              label="description"
+              variant="outlined"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
+        </Box>
+        <Button variant="contained" color="success" type="submit">
           {productToUpdate ? "Save Changes" : "Create Product"}
-        </button>
+        </Button>
       </form>
     </div>
   );
