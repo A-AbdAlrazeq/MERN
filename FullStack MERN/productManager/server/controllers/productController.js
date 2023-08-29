@@ -7,7 +7,7 @@ const createProduct = async (req, res) => {
     await product.save();
     res.json(product);
   } catch (error) {
-    res.status(500).json({ error: "Error creating product" });
+    res.status(400).json(error);
   }
 };
 

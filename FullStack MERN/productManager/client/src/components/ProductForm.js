@@ -9,6 +9,7 @@ const ProductForm = ({ productToUpdate, onSubmit, addProductToList }) => {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
+  const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,7 +42,7 @@ const ProductForm = ({ productToUpdate, onSubmit, addProductToList }) => {
         setDescription("");
       }
     } catch (error) {
-      console.error("Error:", error);
+      setErrors(error.response.data.errors);
     }
   };
 
@@ -49,6 +50,9 @@ const ProductForm = ({ productToUpdate, onSubmit, addProductToList }) => {
     <div>
       <h2>{productToUpdate ? "Edit" : "Create"} Product</h2>
       <form style={{ padding: "10px" }} onSubmit={handleSubmit}>
+        {/*  {Object.keys(errors).map((key) => (
+          <p key="{key}">{errors[key].message}</p>
+        ))} */}
         <Box
           component="form"
           sx={{
@@ -66,6 +70,7 @@ const ProductForm = ({ productToUpdate, onSubmit, addProductToList }) => {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
+            {errors.title ? <p>{errors.title.message}</p> : null}
           </div>
           <div>
             <TextField
@@ -75,6 +80,7 @@ const ProductForm = ({ productToUpdate, onSubmit, addProductToList }) => {
               value={price}
               onChange={(e) => setPrice(e.target.value)}
             />
+            {errors.price ? <p>{errors.price.message}</p> : null}
           </div>
           <div>
             <TextField
@@ -83,6 +89,7 @@ const ProductForm = ({ productToUpdate, onSubmit, addProductToList }) => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
+            {errors.description ? <p>{errors.description.message}</p> : null}
           </div>
         </Box>
         <Button variant="contained" color="success" type="submit">
