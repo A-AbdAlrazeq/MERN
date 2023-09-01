@@ -29,9 +29,10 @@ class Unit extends Card {
 }
 
 class Effect extends Card {
-  constructor(name, cost, text, magnitude) {
+  constructor(name, cost, text, stat, magnitude) {
     super(name, cost);
     this.text = text;
+    this.stat = stat;
     this.magnitude = magnitude;
   }
 
@@ -45,22 +46,52 @@ class Effect extends Card {
   }
 
   modifyAttribute(target) {
-    if (this.text === "Increase Power") {
+    if (this.stat === "power") {
       target.power += this.magnitude;
-    } else if (this.text === "Reduce Resilience") {
-      target.resilience -= this.magnitude;
+    } else if (this.stat === "resilience") {
+      target.resilience += this.magnitude;
     }
   }
 }
 
-const unit1 = new Unit("abood", 3, 5, 10);
-const effect1 = new Effect("Red", 2, "Increase Power", 3);
-const unit2 = new Unit("razeq", 3, 5, 10);
-const effect2 = new Effect("Black", 2, "Reduce Resilience", 3);
+// Step 1: Make an instance of "Red Belt Ninja"
+const redBeltNinja = new Unit("Red Belt Ninja", 3, 3, 4);
 
-unit1.attack(unit2); // This decreases unit2's resilience
-effect1.play(unit1); // This increases unit1's power
-effect2.play(unit2); // This decreases unit2's resilience
+// Step 2: Make an instance of "Hard Algorithm" and play it on "Red Belt Ninja"
+const hardAlgorithm = new Effect(
+  "Hard Algorithm",
+  2,
+  "Increase resilience by 3",
+  "resilience",
+  3
+);
+hardAlgorithm.play(redBeltNinja);
 
-console.log(unit1);
-console.log(unit2);
+// Step 3: Make an instance "Black Belt Ninja"
+const blackBeltNinja = new Unit("Black Belt Ninja", 4, 5, 4);
+
+// Step 4: Make an instance of "Unhandled Promise Rejection" and play it on "Red Belt Ninja"
+const unhandledPromiseRejection = new Effect(
+  "Unhandled Promise Rejection",
+  1,
+  "Reduce resilience by 2",
+  "resilience",
+  -2
+);
+unhandledPromiseRejection.play(redBeltNinja);
+
+// Step 5: Make an instance of "Pair Programming" and play it on "Red Belt Ninja"
+const pairProgramming = new Effect(
+  "Pair Programming",
+  3,
+  "Increase power by 2",
+  "power",
+  2
+);
+pairProgramming.play(redBeltNinja);
+
+// Step 6: "Red Belt Ninja" uses the attack method on "Black Belt Ninja"
+redBeltNinja.attack(blackBeltNinja);
+
+console.log(redBeltNinja);
+console.log(blackBeltNinja);
