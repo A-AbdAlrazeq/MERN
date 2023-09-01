@@ -32,11 +32,10 @@ class BankAccount {
   }
 }
 
-// Create two BankAccount instances
 const account1 = new BankAccount(0.02, 500);
 const account2 = new BankAccount(0.03, 1000);
 
-// Perform operations on the first account using chaining
+//To the first account, make 3 deposits and 1 withdrawal, then calculate interest and display the account's info all in one line of code (i.e. chaining)
 account1
   .deposit(100)
   .deposit(200)
@@ -44,8 +43,7 @@ account1
   .withdraw(350)
   .yieldInterest()
   .displayAccountInfo();
-
-// Perform operations on the second account using chaining
+//To the second account, make 2 deposits and 4 withdrawals, then calculate interest and display the account's info all in one line of code (i.e. chaining)
 account2
   .deposit(500)
   .deposit(300)
