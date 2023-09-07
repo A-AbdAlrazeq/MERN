@@ -1,7 +1,17 @@
 const express = require("express");
-const { register } = require("../../controllers/Users/UserController");
+const {
+  register,
+  login,
+  getProfile,
+} = require("../../controllers/Users/UserController");
+const isLogin = require("../../middleware/isLogin");
+isLogin;
 const usersRouter = express.Router();
 //!Register
-usersRouter.post("/api/v1/users/register", register);
+usersRouter.post("/register", register);
+//!login
+usersRouter.post("login", login);
+//!profile
+usersRouter.get("/profile/:id", isLogin, getProfile);
 
 module.exports = usersRouter;
