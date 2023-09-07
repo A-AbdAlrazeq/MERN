@@ -78,10 +78,12 @@ exports.login = async (req, res) => {
 exports.getProfile = async (req, res, next) => {
   try {
     //! get user id from params
+    const id = req.userAuth._id;
+    const user = await User.findById(id);
     res.json({
       status: "success",
       message: "Profile fetched",
-      data: "user data",
+      user: user,
     });
   } catch (error) {
     res.json({ status: "failed", messene: error?.message });
