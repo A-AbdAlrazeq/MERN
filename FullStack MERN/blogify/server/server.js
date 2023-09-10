@@ -6,6 +6,7 @@ const {
   notFound,
   globalErrHandler,
 } = require("./middleware/globalErrorHandler");
+const categoryRouter = require("./routes/Category/CategoryRouter");
 
 //!server
 const app = express();
@@ -15,6 +16,7 @@ connectDB();
 app.use(express.json()); //pass incoming data
 // routes
 app.use("/api/v1/users", usersRouter);
+app.use("/api/v1/categories", categoryRouter);
 //? not found middleware
 app.use(notFound);
 //! Error middleware

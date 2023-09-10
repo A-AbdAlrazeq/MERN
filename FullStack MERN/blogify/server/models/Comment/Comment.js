@@ -1,70 +1,24 @@
 const mongoose = require("mongoose");
 
 //schema
-const postSchema = new mongoose.Schema(
+const commentSchema = new mongoose.Schema(
   {
-    title: {
+    message: {
       type: String,
       required: true,
     },
-    image: {
-      type: String,
-      required: true,
-    },
-    claps: {
-      type: Number,
-      default: 0,
-    },
-    content: {
-      type: String,
-      required: true,
-    },
+
     author: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "User",
     },
-    shares: {
-      type: Number,
-      default: 0,
-    },
 
-    postViews: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
-
-    category: {
+    postId: {
       type: mongoose.Schema.Types.ObjectId,
+      ref: "Post",
       required: true,
-      ref: "Category",
     },
-    scheduledPublished: {
-      type: Date,
-      default: null,
-    },
-
-    likes: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
-
-    dislikes: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
-    comments: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Comment",
-      },
-    ],
   },
   {
     timestamps: true,
@@ -73,6 +27,6 @@ const postSchema = new mongoose.Schema(
 
 //compile schema to  model
 
-const Post = mongoose.model("Post", postSchema);
+const Comment = mongoose.model("Comment", commentSchema);
 
-module.exports = Post;
+module.exports = Comment;
