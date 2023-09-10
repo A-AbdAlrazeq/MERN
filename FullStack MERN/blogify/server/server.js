@@ -2,6 +2,10 @@ const http = require("http");
 const express = require("express");
 const usersRouter = require("./routes/Users/usersRouter");
 const connectDB = require("./config/database");
+const {
+  notFound,
+  globalErrHandler,
+} = require("./middleware/globalErrorHandler");
 
 //!server
 const app = express();
@@ -11,6 +15,10 @@ connectDB();
 app.use(express.json()); //pass incoming data
 // routes
 app.use("/api/v1/users", usersRouter);
+//? not found middleware
+app.use(notFound);
+//! Error middleware
+app.use(globalErrHandler);
 const server = http.createServer(app);
 //?start the server
 

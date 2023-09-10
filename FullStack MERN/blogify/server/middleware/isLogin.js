@@ -15,8 +15,6 @@ const isLogin = (req, res, next) => {
     if (err) {
       return "Invalid token";
     } else {
-      //!save the user
-      //*send the user
       next();
     }
   });
