@@ -2,6 +2,8 @@ const http = require("http");
 const express = require("express");
 const usersRouter = require("./routes/Users/usersRouter");
 const connectDB = require("./config/database");
+const dotenv = require("dotenv");
+dotenv.config();
 const {
   notFound,
   globalErrHandler,
