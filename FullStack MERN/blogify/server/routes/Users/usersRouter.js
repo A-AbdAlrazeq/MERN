@@ -9,6 +9,7 @@ const {
   followingUser,
   unFollowingUser,
   forgotPassword,
+  resetPassword,
 } = require("../../controllers/Users/UserController");
 const isLogin = require("../../middleware/isLogin");
 isLogin;
@@ -27,6 +28,8 @@ usersRouter.put("/unblock/:userIdToUnBlock", isLogin, unblockUser);
 usersRouter.get("/profile-viewer/:userProfileId", isLogin, profileViewers);
 // forgot password user
 usersRouter.post("/forgot-password", forgotPassword);
+// reset password user
+usersRouter.post("/reset-password/:resetToken", resetPassword);
 // following user
 usersRouter.put("/following/:userToFollowId", isLogin, followingUser);
 // unFollowing user
