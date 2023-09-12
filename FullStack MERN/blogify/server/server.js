@@ -11,11 +11,13 @@ const {
 const categoryRouter = require("./routes/Category/CategoryRouter");
 const postRouter = require("./routes/Posts/PostRouter");
 const commentRouter = require("./routes/Comments/CommentRouter");
+const sendEmail = require("./utils/sendEmail");
 
 //!server
 const app = express();
 //connect to db
 connectDB();
+sendEmail("aboodrazeqxx@gmail.com", "some massage");
 //middleware
 app.use(express.json()); //pass incoming data
 // routes
