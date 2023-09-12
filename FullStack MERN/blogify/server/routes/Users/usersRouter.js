@@ -8,6 +8,7 @@ const {
   profileViewers,
   followingUser,
   unFollowingUser,
+  forgotPassword,
 } = require("../../controllers/Users/UserController");
 const isLogin = require("../../middleware/isLogin");
 isLogin;
@@ -24,6 +25,8 @@ usersRouter.put("/block/:userIdToBlock", isLogin, blockUser);
 usersRouter.put("/unblock/:userIdToUnBlock", isLogin, unblockUser);
 // unblock user
 usersRouter.get("/profile-viewer/:userProfileId", isLogin, profileViewers);
+// forgot password user
+usersRouter.post("/forgot-password", forgotPassword);
 // following user
 usersRouter.put("/following/:userToFollowId", isLogin, followingUser);
 // unFollowing user

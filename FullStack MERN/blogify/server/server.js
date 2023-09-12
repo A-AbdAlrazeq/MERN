@@ -17,7 +17,6 @@ const sendEmail = require("./utils/sendEmail");
 const app = express();
 //connect to db
 connectDB();
-sendEmail("aboodrazeqxx@gmail.com", "some massage");
 //middleware
 app.use(express.json()); //pass incoming data
 // routes
