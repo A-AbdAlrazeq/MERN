@@ -9,6 +9,8 @@ const {
   globalErrHandler,
 } = require("./middleware/globalErrorHandler");
 const categoryRouter = require("./routes/Category/CategoryRouter");
+const postRouter = require("./routes/Posts/PostRouter");
+const commentRouter = require("./routes/Comments/CommentRouter");
 
 //!server
 const app = express();
@@ -19,6 +21,8 @@ app.use(express.json()); //pass incoming data
 // routes
 app.use("/api/v1/users", usersRouter);
 app.use("/api/v1/categories", categoryRouter);
+app.use("/api/v1/posts", postRouter);
+app.use("/api/v1/comments", commentRouter);
 //? not found middleware
 app.use(notFound);
 //! Error middleware

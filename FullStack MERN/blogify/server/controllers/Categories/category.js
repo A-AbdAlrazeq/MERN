@@ -23,6 +23,9 @@ exports.createCategory = asyncHandler(async (req, res) => {
   });
 });
 
+//@desc  GET  Categories
+//@route GET /api/v1/categories
+//@access Public
 exports.getCategories = asyncHandler(async (req, res) => {
   const categories = await Category.find({}).populate({
     path: "posts",
@@ -64,7 +67,7 @@ exports.updateCategory = asyncHandler(async (req, res) => {
   );
   res.status(201).json({
     status: "success",
-    message: "Categories successfully deleted",
+    message: "Categories successfully updated",
     category,
   });
 });
