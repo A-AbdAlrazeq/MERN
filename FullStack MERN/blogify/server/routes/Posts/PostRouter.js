@@ -7,10 +7,11 @@ const {
   updatePost,
   deletePost,
 } = require("../../controllers/posts/posts");
+const checkAccountVerification = require("../../middleware/isAccountVerified");
 const postsRouter = express.Router();
 
 //create
-postsRouter.post("/", isLogin, createPost);
+postsRouter.post("/", isLogin, checkAccountVerification, createPost);
 //getting all
 postsRouter.get("/", getPosts);
 //getting single post
