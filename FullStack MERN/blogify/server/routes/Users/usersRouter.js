@@ -10,6 +10,8 @@ const {
   unFollowingUser,
   forgotPassword,
   resetPassword,
+  accountVerificationEmail,
+  verifyAccount,
 } = require("../../controllers/Users/UserController");
 const isLogin = require("../../middleware/isLogin");
 isLogin;
@@ -33,5 +35,13 @@ usersRouter.post("/reset-password/:resetToken", resetPassword);
 // following user
 usersRouter.put("/following/:userToFollowId", isLogin, followingUser);
 // unFollowing user
-usersRouter.put("/unfollowing/:userToUnFollowId", isLogin, unFollowingUser);
+usersRouter.put("/unFollowing/:userToUnFollowId", isLogin, unFollowingUser);
+// send account verification email
+usersRouter.put(
+  "/account-verification-email",
+  isLogin,
+  accountVerificationEmail
+);
+// send account verification email
+usersRouter.put("/account-verification/:verifyToken", isLogin, verifyAccount);
 module.exports = usersRouter;
