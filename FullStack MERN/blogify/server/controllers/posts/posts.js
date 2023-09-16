@@ -175,3 +175,65 @@ exports.disLikePost = expressAsyncHandler(async (req, res) => {
   await post.save();
   res.status(200).json({ message: "Post disliked successfully.", post });
 });
+
+//@desc   clap a Post
+//@route  PUT /api/v1/posts/claps/:id
+//@access Private
+
+exports.claps = expressAsyncHandler(async (req, res) => {
+  //Get the id of the post
+  const { id } = req.params;
+  //Find the post
+  const post = await Post.findById(id);
+  if (!post) {
+    throw new Error("Post not found");
+  }
+  //implement the claps
+  const updatedPost = await Post.findByIdAndUpdate(
+    id,
+    {
+      $inc: { claps: 1 },
+    },
+    {
+      new: true,
+    }
+  );
+  res.status(200).json({ message: "Post clapped successfully.", updatedPost });
+});
+
+//@desc   Schedule a post
+//@route  PUT /api/v1/posts/schedule/:postId
+//@access Private
+
+exports.schedule = expressAsyncHandler(async (req, res) => {
+  //get the payload
+  const { scheduledPublish } = req.body;
+  const { postId } = req.params;
+  //check if postId and scheduledPublished found
+  if (!postId || !scheduledPublish) {
+    throw new Error("PostId and schedule date are required");
+  }
+  //Find the post
+  const post = await Post.findById(postId);
+  if (!post) {
+    throw new Error("Post not found...");
+  }
+  //check if the user is the author of the post
+  if (post.author.toString() !== req.userAuth._id.toString()) {
+    throw new Error("You can schedule your own post ");
+  }
+  // Check if the scheduledPublish date is in the past
+  const scheduleDate = new Date(scheduledPublish);
+  const currentDate = new Date();
+  if (scheduleDate < currentDate) {
+    throw new Error("The scheduled publish date cannot be in the past.");
+  }
+  //update the post
+  post.scheduledPublish = scheduledPublish;
+  await post.save();
+  res.json({
+    status: "success",
+    message: "Post scheduled successfully",
+    post,
+  });
+});

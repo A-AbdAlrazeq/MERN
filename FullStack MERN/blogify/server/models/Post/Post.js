@@ -40,7 +40,7 @@ const postSchema = new mongoose.Schema(
       required: true,
       ref: "Category",
     },
-    scheduledPublished: {
+    scheduledPublish: {
       type: Date,
       default: null,
     },
