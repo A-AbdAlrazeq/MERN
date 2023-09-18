@@ -67,6 +67,14 @@ const postSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+
+    //to get the real object
+    toJSON: {
+      virtuals: true,
+    },
+    toObject: {
+      virtuals: true,
+    },
   }
 );
 

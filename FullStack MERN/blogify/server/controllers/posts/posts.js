@@ -84,7 +84,11 @@ exports.getPosts = asyncHandler(async (req, res) => {
       },
     ],
   };
-  let posts = await Post.find(query);
+  let posts = await Post.find(query).populate({
+    path: "author",
+    model: "User",
+    select: "email role username",
+  });
   res.status(201).json({
     status: "success",
     message: "Posts successfully fetched",

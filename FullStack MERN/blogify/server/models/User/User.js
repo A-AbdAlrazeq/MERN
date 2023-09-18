@@ -76,6 +76,13 @@ const userSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    //to get the real object
+    toJSON: {
+      virtuals: true,
+    },
+    toObject: {
+      virtuals: true,
+    },
   }
 );
 //! Generate password reset token
