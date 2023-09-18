@@ -66,16 +66,25 @@ exports.createPost = asyncHandler(async (req, res) => {
 exports.getPosts = asyncHandler(async (req, res) => {
   //!find all users who have blocked the logged-in user
   const loggedInUserId = req.userAuth?._id;
+  //get current time
+  const currentTime = new Date();
   //return all users that's has blocked the login user
   const usersBlockingLoggedInUser = await User.find({
     blockedUsers: loggedInUserId,
   });
   // Extract the IDs of users who have blocked the logged-in user
   const blockingUsersIds = usersBlockingLoggedInUser?.map((user) => user?._id);
-  //filter all post from the user that has blocked the login user using not included(nin)
-  let posts = await Post.find({
+  //filter all post from the user that has blocked the login user using not included(nin) & get post when date less or equal current date or equal null
+  let query = {
     author: { $nin: blockingUsersIds },
-  });
+    $or: [
+      {
+        scheduledPublish: { $lte: currentTime },
+        scheduledPublish: null,
+      },
+    ],
+  };
+  let posts = await Post.find(query);
   res.status(201).json({
     status: "success",
     message: "Posts successfully fetched",
