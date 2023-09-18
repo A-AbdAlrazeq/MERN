@@ -17,7 +17,7 @@ const postsRouter = express.Router();
 //create
 postsRouter.post("/", isLogin, checkAccountVerification, createPost);
 //getting all
-postsRouter.get("/", getPosts);
+postsRouter.get("/", isLogin, getPosts);
 //getting single post
 postsRouter.get("/:id", getPost);
 //update

@@ -64,7 +64,18 @@ exports.createPost = asyncHandler(async (req, res) => {
 //@route GET /api/v1/posts
 //@access public
 exports.getPosts = asyncHandler(async (req, res) => {
-  const posts = await Post.find({}).populate("comments");
+  //!find all users who have blocked the logged-in user
+  const loggedInUserId = req.userAuth?._id;
+  //return all users that's has blocked the login user
+  const usersBlockingLoggedInUser = await User.find({
+    blockedUsers: loggedInUserId,
+  });
+  // Extract the IDs of users who have blocked the logged-in user
+  const blockingUsersIds = usersBlockingLoggedInUser?.map((user) => user?._id);
+  //filter all post from the user that has blocked the login user using not included(nin)
+  let posts = await Post.find({
+    author: { $nin: blockingUsersIds },
+  });
   res.status(201).json({
     status: "success",
     message: "Posts successfully fetched",
