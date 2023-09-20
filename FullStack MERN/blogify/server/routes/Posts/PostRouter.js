@@ -20,7 +20,7 @@ const postsRouter = express.Router();
 const upload = multer({ storage });
 
 //create
-postsRouter.post("/", isLogin, checkAccountVerification, createPost);
+postsRouter.post("/", isLogin, upload.single("file"), createPost);
 //getting all
 postsRouter.get("/", isLogin, getPosts);
 //getting single post
