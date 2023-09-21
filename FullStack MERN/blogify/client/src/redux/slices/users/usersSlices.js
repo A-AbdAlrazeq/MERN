@@ -1,6 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-//initialstate
+import {
+  resetErrorAction,
+  resetSuccessAction,
+} from "../globalSlice/globalSlice";
+//initialState
 
 const INITIAL_STATE = {
   loading: false,
@@ -43,6 +47,22 @@ export const loginAction = createAsyncThunk(
     }
   }
 );
+//! Register Action
+export const registerAction = createAsyncThunk(
+  "users/register",
+  async (payload, { rejectWithValue, getState, dispatch }) => {
+    //make request
+    try {
+      const { data } = await axios.post(
+        `http://localhost:8000/api/v1/users/register`,
+        payload
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
 // ! Logout action
 export const logoutAction = createAsyncThunk("users/logout", async () => {
   //remove token from localStorage
@@ -69,6 +89,31 @@ const userSlice = createSlice({
     builder.addCase(loginAction.rejected, (state, action) => {
       state.error = action.payload;
       state.loading = false;
+    });
+    //! Register
+    builder.addCase(registerAction.pending, (state, action) => {
+      state.loading = true;
+    });
+    //handle fulfilled state
+    builder.addCase(registerAction.fulfilled, (state, action) => {
+      state.user = action.payload;
+      state.isRegistered = true;
+      state.loading = false;
+      state.error = null;
+    });
+    //* Handle the rejection
+    builder.addCase(registerAction.rejected, (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+      state.isRegistered = false;
+    });
+    //! Reset error action
+    builder.addCase(resetErrorAction.fulfilled, (state) => {
+      state.error = null;
+    });
+    //! Reset success action
+    builder.addCase(resetSuccessAction.fulfilled, (state) => {
+      state.success = false;
     });
   },
 });
