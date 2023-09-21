@@ -56,6 +56,7 @@ const userSlice = createSlice({
     //handle fullFilled state
     builder.addCase(loginAction.fulfilled, (state, action) => {
       state.userAuth.userInfo = action.payload;
+      state.success = true;
       state.loading = false;
       state.error = null;
     });
