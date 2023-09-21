@@ -4,7 +4,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { PlusIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
 import { FaBlog } from "react-icons/fa";
-//import { logoutAction } from "../../redux/slices/users/usersSlices";
+import { logoutAction } from "../../redux/slices/users/usersSlices";
 import { useDispatch, useSelector } from "react-redux";
 
 function classNames(...classes) {
@@ -16,7 +16,7 @@ export default function PrivateNavbar() {
   //!dispatch
   const dispatch = useDispatch();
   const logoutHandler = () => {
-    //dispatch(logoutAction());
+    dispatch(logoutAction());
     //reload
     window.location.reload();
   };
