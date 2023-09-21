@@ -3,6 +3,7 @@ const globalErrHandler = (err, req, res, next) => {
   const status = err?.status ? err?.status : "failed";
   //message
   const message = err?.message;
+  console.log(message);
   //stack
   const stack = err?.stack;
   res.status(500).json({

@@ -23,7 +23,9 @@ exports.register = asyncHandler(async (req, res) => {
     email,
     password,
   });
-
+  if (password == "" && email != "" && username != "") {
+    throw new Error("password : Path 'password' is required");
+  }
   const salt = await bcrypt.genSalt(10);
   newUser.password = await bcrypt.hash(password, salt);
 
