@@ -1,7 +1,6 @@
 import React from "react";
-import Register from "../Users/Register";
 
-const Homepage = () => {
+const HomepageTemplate = () => {
   return (
     <div>
       <section
@@ -86,4 +85,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default HomepageTemplate;

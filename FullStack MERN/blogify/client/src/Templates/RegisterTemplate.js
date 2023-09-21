@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Register = () => {
+const RegisterTemplate = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -156,4 +156,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterTemplate;
