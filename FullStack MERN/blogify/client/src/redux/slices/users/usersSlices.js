@@ -19,7 +19,9 @@ const INITIAL_STATE = {
   isEmailSent: false,
   userAuth: {
     error: null,
-    userInfo: {},
+    userInfo: localStorage.getItem("userInfo")
+      ? JSON.parse(localStorage.getItem("userInfo"))
+      : null,
   },
 };
 
