@@ -2,8 +2,8 @@ const http = require("http");
 const express = require("express");
 const usersRouter = require("./routes/Users/usersRouter");
 const connectDB = require("./config/database");
-const cors = require("cors");
 const dotenv = require("dotenv");
+const cors = require("cors");
 dotenv.config();
 const {
   notFound,
@@ -18,10 +18,10 @@ const sendEmail = require("./utils/sendEmail");
 const app = express();
 //connect to db
 connectDB();
-//middleware
-app.use(express.json()); //pass incoming data
 //cors middleware
 app.use(cors());
+//middleware
+app.use(express.json()); //pass incoming data
 // routes
 app.use("/api/v1/users", usersRouter);
 app.use("/api/v1/categories", categoryRouter);
