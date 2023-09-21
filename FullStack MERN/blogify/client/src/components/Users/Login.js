@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginAction } from "../../redux/slices/users/usersSlices";
 import LoadingComponent from "../Alert/LoadingComponent";
 import ErrorMsg from "../Alert/ErrorMsg";
 import SuccessMsg from "../Alert/SuccessMsg";
 
 const Login = () => {
+  //! Navigation hook
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     password: "",
     username: "",
@@ -39,6 +41,16 @@ const Login = () => {
     (state) => state?.users
   );
   console.log(userAuth, loading, error, success);
+  //! Redirect
+  useEffect(() => {
+    if (
+      userAuth?.userInfo?.token &&
+      error?.message !== "Token expired/Invalid"
+    ) {
+      navigate("/profile");
+    }
+  }, [userAuth?.userInfo?.token]);
+
   return (
     <section className="py-16 xl:pb-56 bg-white overflow-hidden">
       <div className="container px-4 mx-auto">
