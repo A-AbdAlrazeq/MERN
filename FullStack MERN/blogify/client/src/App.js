@@ -9,6 +9,7 @@ import PrivateNavbar from "./components/Navbar/PrivateNavbar";
 import ProtectedRoute from "./components/AuthRoute/ProtectedRoute";
 import PublicPosts from "./components/Posts/PublicPosts";
 import AddPost from "./components/Posts/AddPost";
+import PostDetails from "./components/Posts/PostDetails";
 export default function App() {
   //! Get the login user from store
   const { userAuth } = useSelector((state) => state?.users);
@@ -36,6 +37,15 @@ export default function App() {
           element={
             <ProtectedRoute>
               <AddPost />
+            </ProtectedRoute>
+          }
+        ></Route>
+        {/* Post details */}
+        <Route
+          path="/posts/:postId"
+          element={
+            <ProtectedRoute>
+              <PostDetails />
             </ProtectedRoute>
           }
         ></Route>

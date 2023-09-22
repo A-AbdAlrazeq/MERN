@@ -100,7 +100,7 @@ export default function PrivateNavbar() {
                         <Menu.Item>
                           {({ active }) => (
                             <Link
-                              to={"/user-profile"}
+                              to={"/profile"}
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
@@ -189,7 +189,7 @@ export default function PrivateNavbar() {
               </div>
               <div className="mt-3 space-y-1">
                 <Link
-                  to={"/user-profile"}
+                  to={"/profile"}
                   className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800 sm:px-6"
                 >
                   Your Profile

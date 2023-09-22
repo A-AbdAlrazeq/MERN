@@ -58,6 +58,21 @@ export const addPostAction = createAsyncThunk(
     }
   }
 );
+//!fetch single  posts
+export const getPostAction = createAsyncThunk(
+  "posts/get-post",
+  async (postId, { rejectWithValue, getState, dispatch }) => {
+    //make request
+    try {
+      const { data } = await axios.get(
+        `http://localhost:8000/api/v1/posts/${postId}`
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
 //! post slices
 const postSlice = createSlice({
   name: "posts",
@@ -78,6 +93,7 @@ const postSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     });
+
     //! create post
     builder.addCase(addPostAction.pending, (state, action) => {
       state.loading = true;
@@ -92,6 +108,21 @@ const postSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     });
+
+    //! get single post
+    builder.addCase(getPostAction.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(getPostAction.fulfilled, (state, action) => {
+      state.post = action.payload;
+      state.loading = false;
+      state.error = null;
+    });
+    builder.addCase(getPostAction.rejected, (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    });
+
     //! Reset error action
     builder.addCase(resetErrorAction.fulfilled, (state) => {
       state.error = null;

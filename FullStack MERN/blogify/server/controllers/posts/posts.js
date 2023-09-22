@@ -115,7 +115,9 @@ exports.getPublicPosts = asyncHandler(async (req, res) => {
 //@route GET /api/v1/posts/:id
 //@access public
 exports.getPost = asyncHandler(async (req, res) => {
-  const post = await Post.findById(req.params.id);
+  const post = await Post.findById(req.params.id)
+    .populate("author")
+    .populate("category");
   res.status(201).json({
     status: "success",
     message: "Post successfully fetched",
