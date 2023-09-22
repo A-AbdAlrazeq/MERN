@@ -29,7 +29,7 @@ postsRouter.get("/public", getPublicPosts);
 //getting single post
 postsRouter.get("/:id", getPost);
 //update
-postsRouter.put("/:id", isLogin, updatePost);
+postsRouter.put("/:id", isLogin, upload.single("file"), updatePost);
 //like post
 postsRouter.put("/likes/:id", isLogin, likePost);
 //dislike post

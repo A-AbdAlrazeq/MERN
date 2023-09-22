@@ -11,6 +11,7 @@ import PublicPosts from "./components/Posts/PublicPosts";
 import AddPost from "./components/Posts/AddPost";
 import PostDetails from "./components/Posts/PostDetails";
 import PostsLists from "./components/Posts/PostsLists";
+import UpdatePost from "./components/Posts/UpdatePost";
 export default function App() {
   //! Get the login user from store
   const { userAuth } = useSelector((state) => state?.users);
@@ -47,6 +48,15 @@ export default function App() {
           element={
             <ProtectedRoute>
               <PostDetails />
+            </ProtectedRoute>
+          }
+        ></Route>
+        {/*update Post */}
+        <Route
+          path="/posts/:postId/update"
+          element={
+            <ProtectedRoute>
+              <UpdatePost />
             </ProtectedRoute>
           }
         ></Route>
