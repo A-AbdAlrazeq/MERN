@@ -4,10 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate, Link } from "react-router-dom";
 //import LoadingComponent from "../Alert/LoadingComponent";
 import ErrorMsg from "../Alert/ErrorMsg";
-//import PostStats from "./PostStats";
-//import calculateReadingtime from "../../utils/calculateReadingtime";
+import PostStats from "./PostStats";
+import calculateReadingTime from "../../utils/calculateReadingTime";
 //import AddComment from "../Comments/AddComment";
-
 const PostDetails = () => {
   //! navigation
   const navigate = useNavigate();
@@ -113,17 +112,16 @@ const PostDetails = () => {
             }}
           >
             {/* Posts stats */}
-            {/*  <PostStats
+            <PostStats
               views={post?.post?.postViews}
               likes={post?.post?.likes.length}
               dislikes={post?.post?.dislikes.length}
-              postViews={post?.post?.postViews}
               totalComments={post?.post?.comments?.length}
               createdAt={post?.post?.createdAt}
-              readingTime={calculateReadingtime(post?.post?.content)}
+              readingTime={calculateReadingTime(post?.post?.content)}
               postId={postId}
               claps={post?.post?.claps}
-            /> */}
+            />
           </div>
           <div className="container px-4 mx-auto">
             <div className="mx-auto md:max-w-3xl">
