@@ -12,6 +12,7 @@ const {
   disLikePost,
   claps,
   schedule,
+  getPublicPosts,
 } = require("../../controllers/posts/posts");
 const checkAccountVerification = require("../../middleware/isAccountVerified");
 const postsRouter = express.Router();
@@ -23,6 +24,8 @@ const upload = multer({ storage });
 postsRouter.post("/", isLogin, upload.single("file"), createPost);
 //getting all
 postsRouter.get("/", isLogin, getPosts);
+//get only 4 posts
+postsRouter.get("/public", getPublicPosts);
 //getting single post
 postsRouter.get("/:id", getPost);
 //update

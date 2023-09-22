@@ -7,6 +7,7 @@ import PublicNavbar from "./components/Navbar/PublicNavbar";
 import Register from "./components/Users/Register";
 import PrivateNavbar from "./components/Navbar/PrivateNavbar";
 import ProtectedRoute from "./components/AuthRoute/ProtectedRoute";
+import PublicPosts from "./components/Posts/PublicPosts";
 export default function App() {
   //! Get the login user from store
   const { userAuth } = useSelector((state) => state?.users);
