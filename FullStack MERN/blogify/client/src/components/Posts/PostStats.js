@@ -25,13 +25,11 @@ const PostStats = ({
   //! Like post handler
   const likePostHandler = () => {
     dispatch(likePostAction(postId));
-    window.location.reload();
   };
 
   //! disLike post handler
   const dislikePostHandler = () => {
     dispatch(dislikePostAction(postId));
-    window.location.reload();
   };
 
   return (

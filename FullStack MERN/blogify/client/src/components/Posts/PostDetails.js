@@ -5,7 +5,6 @@ import {
 } from "../../redux/slices/posts/postsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate, Link } from "react-router-dom";
-//import LoadingComponent from "../Alert/LoadingComponent";
 import ErrorMsg from "../Alert/ErrorMsg";
 import PostStats from "./PostStats";
 import calculateReadingTime from "../../utils/calculateReadingTime";
