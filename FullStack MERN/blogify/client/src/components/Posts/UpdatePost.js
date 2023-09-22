@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 import { useParams } from "react-router-dom";
 import { fetchCategoriesAction } from "../../redux/slices/categories/categoriesSlice";
-//import { updatePostAction } from "../../redux/slices/posts/postsSlice";
+import { updatePostAction } from "../../redux/slices/posts/postsSlice";
 import LoadingComponent from "../Alert/LoadingComponent";
 import ErrorMsg from "../Alert/ErrorMsg";
 import SuccessMsg from "../Alert/SuccessMsg";
@@ -64,8 +64,7 @@ const UpdatePost = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     //dispatch action
-
-    // dispatch(updatePostAction({ ...formData, postId }));
+    dispatch(updatePostAction({ ...formData, postId }));
     e.preventDefault();
     setFormData({
       title: "",
