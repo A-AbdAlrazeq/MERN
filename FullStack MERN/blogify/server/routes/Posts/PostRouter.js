@@ -13,6 +13,7 @@ const {
   claps,
   schedule,
   getPublicPosts,
+  postViewCount,
 } = require("../../controllers/posts/posts");
 const checkAccountVerification = require("../../middleware/isAccountVerified");
 const postsRouter = express.Router();
@@ -34,7 +35,9 @@ postsRouter.put("/:id", isLogin, upload.single("file"), updatePost);
 postsRouter.put("/likes/:id", isLogin, likePost);
 //dislike post
 postsRouter.put("/dislikes/:id", isLogin, disLikePost);
-//clap a post
+// post views count
+postsRouter.put("/:id/post-view-count", isLogin, postViewCount);
+// post
 postsRouter.put("/claps/:id", isLogin, claps);
 //schedule post
 postsRouter.put("/schedule/:postId", isLogin, schedule);
