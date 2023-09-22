@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   likePostAction,
   dislikePostAction,
+  clapPostAction,
 } from "../../redux/slices/posts/postsSlice";
 
 const PostStats = ({
@@ -30,6 +31,11 @@ const PostStats = ({
   //! disLike post handler
   const dislikePostHandler = () => {
     dispatch(dislikePostAction(postId));
+  };
+
+  //! clap post handler
+  const clapPostHandler = () => {
+    dispatch(clapPostAction(postId));
   };
 
   return (
@@ -102,7 +108,10 @@ const PostStats = ({
         {dislikes}
       </button>
       {/* claps */}
-      <button className="flex items-center gap-1 m-2 text-2xl text-gray-400">
+      <button
+        onClick={clapPostHandler}
+        className="flex items-center gap-1 m-2 text-2xl text-gray-400"
+      >
         <MdWavingHand />
         {claps}
       </button>
