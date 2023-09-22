@@ -8,6 +8,7 @@ import Register from "./components/Users/Register";
 import PrivateNavbar from "./components/Navbar/PrivateNavbar";
 import ProtectedRoute from "./components/AuthRoute/ProtectedRoute";
 import PublicPosts from "./components/Posts/PublicPosts";
+import AddPost from "./components/Posts/AddPost";
 export default function App() {
   //! Get the login user from store
   const { userAuth } = useSelector((state) => state?.users);
@@ -20,11 +21,21 @@ export default function App() {
         <Route path="/" element={<Homepage />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
+        {/* Profile */}
         <Route
           path="/profile"
           element={
             <ProtectedRoute>
               <UserProfile />
+            </ProtectedRoute>
+          }
+        ></Route>
+        {/* Add Post */}
+        <Route
+          path="/add-post"
+          element={
+            <ProtectedRoute>
+              <AddPost />
             </ProtectedRoute>
           }
         ></Route>
