@@ -4,7 +4,10 @@ import { RiEmotionLine } from "react-icons/ri";
 import { MdWavingHand } from "react-icons/md";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
-import { likePostAction } from "../../redux/slices/posts/postsSlice";
+import {
+  likePostAction,
+  dislikePostAction,
+} from "../../redux/slices/posts/postsSlice";
 
 const PostStats = ({
   views,
@@ -22,6 +25,12 @@ const PostStats = ({
   //! Like post handler
   const likePostHandler = () => {
     dispatch(likePostAction(postId));
+    window.location.reload();
+  };
+
+  //! disLike post handler
+  const dislikePostHandler = () => {
+    dispatch(dislikePostAction(postId));
     window.location.reload();
   };
 
@@ -73,7 +82,10 @@ const PostStats = ({
         {likes}
       </button>
       {/* dislikes */}
-      <button className="flex items-center gap-1 m-2 text-2xl text-gray-400">
+      <button
+        onClick={dislikePostHandler}
+        className="flex items-center gap-1 m-2 text-2xl text-gray-400"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
