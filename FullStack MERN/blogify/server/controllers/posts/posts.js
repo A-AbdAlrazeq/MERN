@@ -134,7 +134,6 @@ exports.deletePost = asyncHandler(async (req, res) => {
   const postFound = await Post.findById(req.params.id);
   const isAuthor =
     req.userAuth?._id?.toString() === postFound?.author?._id?.toString();
-  console.log(isAuthor);
 
   if (!isAuthor) {
     throw new Error("Action denied, you are not the creator of this post");

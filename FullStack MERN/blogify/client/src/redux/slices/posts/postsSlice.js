@@ -98,6 +98,28 @@ export const fetchPrivatePostsAction = createAsyncThunk(
     }
   }
 );
+//!delete post
+export const deletePostAction = createAsyncThunk(
+  "posts/delete-post",
+  async (postId, { rejectWithValue, getState, dispatch }) => {
+    //make request
+    try {
+      const token = getState().users?.userAuth?.userInfo?.token;
+      const config = {
+        headers: {
+          Authorization: `Abd ${token}`,
+        },
+      };
+      const { data } = await axios.delete(
+        `http://localhost:8000/api/v1/posts/${postId}`,
+        config
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
 //! post slices
 const postSlice = createSlice({
   name: "posts",
@@ -148,7 +170,7 @@ const postSlice = createSlice({
       state.loading = false;
     });
 
-    //fetch private posts
+    //! fetch private posts
     builder.addCase(fetchPrivatePostsAction.pending, (state, action) => {
       state.loading = true;
     });
@@ -160,6 +182,21 @@ const postSlice = createSlice({
     });
     //* Handle the rejection
     builder.addCase(fetchPrivatePostsAction.rejected, (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    });
+    //! delete post
+    builder.addCase(deletePostAction.pending, (state, action) => {
+      state.loading = true;
+    });
+    //handle fulfilled state
+    builder.addCase(deletePostAction.fulfilled, (state, action) => {
+      state.success = true;
+      state.loading = false;
+      state.error = null;
+    });
+    //* Handle the rejection
+    builder.addCase(deletePostAction.rejected, (state, action) => {
       state.error = action.payload;
       state.loading = false;
     });

@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
-import { getPostAction } from "../../redux/slices/posts/postsSlice";
+import {
+  getPostAction,
+  deletePostAction,
+} from "../../redux/slices/posts/postsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate, Link } from "react-router-dom";
 //import LoadingComponent from "../Alert/LoadingComponent";
@@ -38,12 +41,12 @@ const PostDetails = () => {
   const isCreator = creator === loginUser;
 
   //! Delete post handler
-  /*   const deletePostHandler = () => {
+  const deletePostHandler = () => {
     dispatch(deletePostAction(postId));
     if (success) {
       navigate("/posts");
     }
-  }; */
+  };
   return (
     <>
       {error ? (
@@ -153,7 +156,7 @@ const PostDetails = () => {
                   </Link>
                   {/* delete */}
                   <button
-                    /* onClick={deletePostHandler} */
+                    onClick={deletePostHandler}
                     className="p-2 text-gray-500 hover:text-gray-700"
                   >
                     <svg
