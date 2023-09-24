@@ -28,5 +28,8 @@ Welcome to Blogify, your go-to platform for creating and managing a dynamic and 
 -----
 ### Home Page
 -----
-![homePage p1](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/19846009-e69e-4dd8-aacd-3f35eb25b05a)
-![homePage p2](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/74c552dd-2ebf-40fe-a615-a118a8d77960)
+![home page](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/5ea80124-1573-4216-b36c-e665255b7453)
+
+### User Login and Registration with validation for all input:
+-----
+
