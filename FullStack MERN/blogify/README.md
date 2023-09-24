@@ -47,8 +47,9 @@ Welcome to Blogify, your go-to platform for creating and managing a dynamic and 
 ----
 ### user can create post with validation:
 ![post](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/760e4c35-889b-493b-981e-87a74d532a1c)
-### user can schedule post with validation:
-![schedule](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/43fb7035-9cbe-48c0-9447-b3e830eae89a)
+### user can view his post and schedule it with validation:
+![schedule](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/7f930029-cd5b-4d55-bab0-ac142dc52797)
+
 
 
 
