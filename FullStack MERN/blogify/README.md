@@ -40,6 +40,9 @@ Welcome to Blogify, your go-to platform for creating and managing a dynamic and 
 ![user profile](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/1c237427-924c-4be8-a51b-ddb7d7edbf53)
 #### User can update his username&email.
 ![update profile](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/062ae040-c2ea-480f-9a57-470e95e8fd08)
+#### User can reset his password.
+![reset full](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/ef23cdde-c951-4e25-b6fb-45e3fbbc46d7)
+
 
 
 
