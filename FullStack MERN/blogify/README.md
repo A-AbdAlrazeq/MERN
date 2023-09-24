@@ -32,4 +32,6 @@ Welcome to Blogify, your go-to platform for creating and managing a dynamic and 
 
 ### User Login and Registration with validation for all input:
 -----
+![login register](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/044445e6-c8f0-4835-9570-ff7c6165d441)
+
 
