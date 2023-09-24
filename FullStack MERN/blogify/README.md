@@ -36,6 +36,6 @@ Welcome to Blogify, your go-to platform for creating and managing a dynamic and 
 
 ### User Profile:
 -----
-![user profile](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/6d4eabc3-24ef-44ce-9a56-2450c66c9d32)
+![user profile](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/c52d1470-b677-4ebd-bbbc-07f0f046beb3)
 
 
