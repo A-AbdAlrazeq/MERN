@@ -24,3 +24,9 @@ Welcome to Blogify, your go-to platform for creating and managing a dynamic and 
 - Error Handling: Building robust error handling mechanisms to improve the user experience.
 - Integrating with Backend Services: Making API calls from React and managing API responses.
 - Deployment: Deploying a MERN application to the cloud.
+## Demo
+-----
+### Home Page
+-----
+![homePage p1](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/19846009-e69e-4dd8-aacd-3f35eb25b05a)
+![homePage p2](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/74c552dd-2ebf-40fe-a615-a118a8d77960)
