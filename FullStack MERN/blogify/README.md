@@ -43,7 +43,10 @@ Welcome to Blogify, your go-to platform for creating and managing a dynamic and 
 #### User can reset his password.
 ![reset full](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/63ff556e-a03f-4c91-9b38-cd11467d2a28)
 
-
+### POSTS:
+----
+### user can create post with validation:
+![post](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/760e4c35-889b-493b-981e-87a74d532a1c)
 
 
 
