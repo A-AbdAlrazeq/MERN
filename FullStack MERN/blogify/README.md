@@ -36,6 +36,7 @@ Welcome to Blogify, your go-to platform for creating and managing a dynamic and 
 
 ### User Profile:
 -----
+#### User can upload profile & cover picture, and verify email to give him access to all features.
 ![user profile](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/c52d1470-b677-4ebd-bbbc-07f0f046beb3)
 
 
