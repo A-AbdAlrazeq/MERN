@@ -16,3 +16,11 @@ Welcome to Blogify, your go-to platform for creating and managing a dynamic and 
 - Post Visibility Rules: Modifying application visibility rules to hide posts from blocked users and scheduled posts until their publishing time.
 - Pagination: Implementing pagination in a web application.
 - Filtering & Searching: Integrating data filtering and robust search functionality.
+- React Components: Building modular, reusable components using React.
+- Routing: Implementing dynamic routing in a single-page-application context with React Router.
+- State Management: Managing application state effectively using Redux.
+- Form Handling: Creating and validating forms with controlled components.
+- Styling: Creating aesthetically pleasing, responsive designs.
+- Error Handling: Building robust error handling mechanisms to improve the user experience.
+- Integrating with Backend Services: Making API calls from React and managing API responses.
+- Deployment: Deploying a MERN application to the cloud.
