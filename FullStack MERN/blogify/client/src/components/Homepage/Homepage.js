@@ -1,20 +1,17 @@
 import React from "react";
+import { FaBookOpen } from "react-icons/fa";
 import Register from "../Users/Register";
+
 import PublicPosts from "../Posts/PublicPosts";
+import { Link } from "react-router-dom";
 
 const Homepage = () => {
   return (
     <div>
-      <section
-        className="relative bg-white overflow-hidden"
-        style={{
-          backgroundImage: 'url("flex-ui-assets/elements/pattern-white.svg")',
-          backgroundPosition: "center",
-        }}
-      >
+      <section className="relative bg-white overflow-hidden">
         <div className="bg-transparent">
           <div className="navbar-menu hidden fixed top-0 left-0 z-50 w-full h-full bg-coolGray-900 bg-opacity-50">
-            <div className="fixed top-0 left-0 bottom-0 w-full w-4/6 max-w-xs bg-white">
+            <div className="fixed top-0 left-0 bottom-0 w-full max-w-xs bg-white">
               <a className="navbar-close absolute top-5 p-4 right-3" href="#">
                 <svg
                   width={12}
@@ -37,40 +34,46 @@ const Homepage = () => {
             <div className="flex flex-wrap items-center">
               <div className="w-full lg:w-1/2 mb-20 lg:mb-0">
                 <span className="inline-block py-px px-2 mb-4 text-xs leading-5 text-white bg-green-500 font-medium uppercase rounded-9xl">
-                  Header
+                  Blogify
                 </span>
                 <h1 className="mb-6 text-3xl md:text-5xl lg:text-6xl leading-tight text-coolGray-900 font-bold tracking-tight">
-                  A small business is only as good as its tools.
+                  Explore the Future with Blogify
                 </h1>
-                <p className="mb-8 text-lg md:text-xl leading-7 text-coolGray-500 font-medium">
-                  Lorem ipsum dolor sit amet, consectetur adipisng.
-                </p>
+                <p className="mb-8 text-lg md:text-xl leading-7 text-coolGray-500 font-medium"></p>
                 <ul>
                   <li className="mb-6 flex items-center">
                     <img
-                      className="mr-3"
-                      src="flex-ui-assets/elements/checkbox-green.svg"
+                      className="mr-3 w-8"
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDjOum6ZqWsYOm9xwGQVs_EkV9-tRy9G35Qojh9aeB_Q&s"
                     />
                     <p className="text-lg md:text-xl leading-7 text-coolGray-500 font-medium">
-                      Lorem ipsum dolor sit amet, consectetur adipisng.
+                      Seamless Account Creation: Blogify makes it incredibly
+                      easy for users to get started. Creating an account is
+                      straightforward, ensuring that bloggers and readers can
+                      join the community.
                     </p>
                   </li>
                   <li className="mb-6 flex items-center">
                     <img
-                      className="mr-3"
-                      src="flex-ui-assets/elements/checkbox-green.svg"
+                      className="mr-3 w-8"
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDjOum6ZqWsYOm9xwGQVs_EkV9-tRy9G35Qojh9aeB_Q&s"
                     />
                     <p className="text-lg md:text-xl leading-7 text-coolGray-500 font-medium">
-                      Suspendisse mollis tincidunt
+                      Effortless Content Creation: Whether you're a seasoned
+                      blogger or just starting, Blogify empowers you to easily
+                      create and share content.
                     </p>
                   </li>
                   <li className="flex items-center">
                     <img
-                      className="mr-3"
-                      src="flex-ui-assets/elements/checkbox-green.svg"
+                      className="mr-3 w-8"
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDjOum6ZqWsYOm9xwGQVs_EkV9-tRy9G35Qojh9aeB_Q&s"
                     />
                     <p className="text-lg md:text-xl leading-7 text-coolGray-500 font-medium">
-                      Praesent varius justo vel justo pulvinar
+                      Community Building: Blogify fosters a sense of belonging
+                      and interaction. Connect with fellow bloggers, follow each
+                      other, and engage in meaningful conversations through
+                      comments and likes.
                     </p>
                   </li>
                 </ul>
