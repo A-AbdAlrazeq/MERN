@@ -53,7 +53,8 @@ Welcome to Blogify, your go-to platform for creating and managing a dynamic and 
 ### user can search for posts by title, select category name & have pagination:
 ![Merged_document](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/1c733ffb-5772-4d97-a6c9-cf97017f9403)
 
-
+### user can read post,add(like,dislike,claps,comment)
+![full read post](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/1fac377b-10ce-4034-a315-d478619d4f25)
 
 
 
