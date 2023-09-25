@@ -42,7 +42,8 @@ Welcome to Blogify, your go-to platform for creating and managing a dynamic and 
 ![update profile](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/062ae040-c2ea-480f-9a57-470e95e8fd08)
 #### User can reset his password.
 ![reset full](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/63ff556e-a03f-4c91-9b38-cd11467d2a28)
-
+#### User can follow or block other users.
+![user follow](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/f56090ec-8a80-4f1a-9ff4-ce53906cdc94)
 ### POSTS:
 ----
 ### user can create post with validation:
@@ -53,7 +54,7 @@ Welcome to Blogify, your go-to platform for creating and managing a dynamic and 
 ### user can search for posts by title, select category name & have pagination:
 ![Merged_document](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/1c733ffb-5772-4d97-a6c9-cf97017f9403)
 
-### user can read post,add(like,dislike,claps,comment)
+### user can read users post,add(like,dislike,claps,comment)
 ![full read post](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/1fac377b-10ce-4034-a315-d478619d4f25)
 
 
