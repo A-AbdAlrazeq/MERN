@@ -59,4 +59,18 @@ Welcome to Blogify, your go-to platform for creating and managing a dynamic and 
 
 
 
+## Tech Stack
+-----
+This project was built using MERN, and uses the following technologies:
+- Client: React,tailwind css,Redux
+- Server: node js,Express
+- Database:MongoDB
+## Tools
+-----
+Different tools were used to plan and manage the project, such as:
+- postman: For test API endpoints.
+- redux devtools: see the Redux state in real time, which can be very helpful while debugging application.
+- mongoDB for VS : connect to database and access all data.
+
+
 
