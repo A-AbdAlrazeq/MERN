@@ -50,6 +50,8 @@ Welcome to Blogify, your go-to platform for creating and managing a dynamic and 
 ### user can view his post and schedule it with validation:
 ![schedule](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/7f930029-cd5b-4d55-bab0-ac142dc52797)
 
+### user can search for posts by title, select category name & have pagination:
+![Merged_document](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/1c733ffb-5772-4d97-a6c9-cf97017f9403)
 
 
 
