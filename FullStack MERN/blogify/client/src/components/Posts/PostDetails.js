@@ -9,7 +9,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import ErrorMsg from "../Alert/ErrorMsg";
 import PostStats from "./PostStats";
 import calculateReadingTime from "../../utils/calculateReadingTime";
-//import AddComment from "../Comments/AddComment";
+import AddComment from "../Comments/AddComment";
 const PostDetails = () => {
   //! navigation
   const navigate = useNavigate();
@@ -181,7 +181,7 @@ const PostDetails = () => {
               </h3>
 
               {/* Comment form */}
-              {/* <AddComment postId={postId} comments={post?.post?.comments} /> */}
+              <AddComment postId={postId} comments={post?.post?.comments} />
             </div>
           </div>
         </section>
