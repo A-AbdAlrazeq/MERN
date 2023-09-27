@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Homepage from "./components/Homepage/Homepage";
 import Login from "./components/Users/Login";
-import UserProfile from "./components/Users/UserProfile";
+import PublicUserProfile from "./components/Users/PublicUserProfile";
 import PublicNavbar from "./components/Navbar/PublicNavbar";
 import Register from "./components/Users/Register";
 import PrivateNavbar from "./components/Navbar/PrivateNavbar";
@@ -26,10 +26,10 @@ export default function App() {
         <Route path="/register" element={<Register />}></Route>
         {/* Profile */}
         <Route
-          path="/profile"
+          path="/user-public-profile/:userId"
           element={
             <ProtectedRoute>
-              <UserProfile />
+              <PublicUserProfile />
             </ProtectedRoute>
           }
         ></Route>
