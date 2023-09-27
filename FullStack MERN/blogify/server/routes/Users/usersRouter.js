@@ -13,6 +13,7 @@ const {
   resetPassword,
   accountVerificationEmail,
   verifyAccount,
+  getPublicProfile,
 } = require("../../controllers/Users/UserController");
 const isLogin = require("../../middleware/isLogin");
 const storage = require("../../utils/fileUpload");
@@ -26,6 +27,8 @@ usersRouter.post("/register", register);
 usersRouter.post("/login", login);
 //!profile
 usersRouter.get("/profile", isLogin, getProfile);
+// public profile
+usersRouter.get("/public-profile/:userId", getPublicProfile);
 // block user
 usersRouter.put("/block/:userIdToBlock", isLogin, blockUser);
 // unblock user
