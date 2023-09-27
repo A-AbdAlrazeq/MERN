@@ -28,5 +28,49 @@ Welcome to Blogify, your go-to platform for creating and managing a dynamic and 
 -----
 ### Home Page
 -----
-![homePage p1](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/19846009-e69e-4dd8-aacd-3f35eb25b05a)
-![homePage p2](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/74c552dd-2ebf-40fe-a615-a118a8d77960)
+![home page](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/5ea80124-1573-4216-b36c-e665255b7453)
+
+### User Login and Registration with validation for all input:
+-----
+![login register](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/044445e6-c8f0-4835-9570-ff7c6165d441)
+
+### User Profile:
+-----
+#### User can upload profile & cover picture, and verify email to give him access to all features.
+![user profile](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/1c237427-924c-4be8-a51b-ddb7d7edbf53)
+#### User can update his username&email.
+![update profile](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/062ae040-c2ea-480f-9a57-470e95e8fd08)
+#### User can reset his password.
+![reset full](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/63ff556e-a03f-4c91-9b38-cd11467d2a28)
+#### User can follow or block other users.
+![user follow](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/f56090ec-8a80-4f1a-9ff4-ce53906cdc94)
+### POSTS:
+----
+### user can create post with validation:
+![post](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/760e4c35-889b-493b-981e-87a74d532a1c)
+### user can view his post and schedule it with validation:
+![schedule](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/7f930029-cd5b-4d55-bab0-ac142dc52797)
+
+### user can search for posts by title, select category name & have pagination:
+![Merged_document](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/1c733ffb-5772-4d97-a6c9-cf97017f9403)
+
+### user can read users post,add(like,dislike,claps,comment)
+![full read post](https://github.com/A-AbdAlrazeq/MERN/assets/107461563/1fac377b-10ce-4034-a315-d478619d4f25)
+
+
+
+## Tech Stack
+-----
+This project was built using MERN, and uses the following technologies:
+- Client: React,tailwind css,Redux
+- Server: node js,Express
+- Database:MongoDB
+## Tools
+-----
+Different tools were used to plan and manage the project, such as:
+- postman: For test API endpoints.
+- redux devtools: see the Redux state in real time, which can be very helpful while debugging application.
+- mongoDB for VS : connect to database and access all data.
+
+
+
