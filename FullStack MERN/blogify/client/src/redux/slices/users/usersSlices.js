@@ -135,7 +135,7 @@ const userSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(userPublicProfileAction.fulfilled, (state, action) => {
-      state.user = action.payload;
+      state.profile = action.payload;
       state.success = true;
       state.loading = false;
       state.error = null;

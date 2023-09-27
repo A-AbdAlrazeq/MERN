@@ -16,9 +16,6 @@ export default function PublicUserProfile() {
   const { user, loading, error, profile } = useSelector(
     (state) => state?.users
   );
-  console.log(user.user.username);
-  console.log(profile);
-  console.log(user.user);
 
   return (
     <>
@@ -53,9 +50,9 @@ export default function PublicUserProfile() {
                         />
                       </div>
                       <div className="mt-6 sm:flex sm:min-w-0 sm:flex-1 sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
-                        <div className="mt-6 min-w-0 flex-1 sm:hidden 2xl:block">
+                        <div className="mt-6 min-w-0 flex-1 2xl:block">
                           <h1 className="truncate text-2xl font-bold text-gray-900">
-                            {user?.user?.username}
+                            {profile?.user?.username}
                           </h1>
                         </div>
                         <div className="justify-stretch mt-6 flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
@@ -186,11 +183,6 @@ export default function PublicUserProfile() {
                         </div>
                       </div>
                     </div>
-                    <div className="mt-6 hidden min-w-0 flex-1 sm:block 2xl:hidden">
-                      <h1 className="truncate text-2xl font-bold text-gray-900">
-                        {user?.user?.name}
-                      </h1>
-                    </div>
                   </div>
                 </div>
 
@@ -202,7 +194,7 @@ export default function PublicUserProfile() {
                         Email
                       </dt>
                       <dd className="mt-1 text-sm text-gray-900">
-                        {user?.user?.email}
+                        {profile?.user?.email}
                       </dd>
                     </div>
                   </dl>
