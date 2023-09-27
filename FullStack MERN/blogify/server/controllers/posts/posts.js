@@ -120,7 +120,14 @@ exports.getPost = asyncHandler(async (req, res) => {
   const post = await Post.findById(req.params.id)
     .populate("author")
     .populate("category")
-    .populate("comments");
+    .populate({
+      path: "comments",
+      model: "Comment",
+      populate: {
+        path: "author",
+        select: "username",
+      },
+    });
   res.status(201).json({
     status: "success",
     message: "Post successfully fetched",
