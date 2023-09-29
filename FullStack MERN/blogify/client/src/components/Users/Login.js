@@ -40,7 +40,6 @@ const Login = () => {
   const { userAuth, loading, error, success } = useSelector(
     (state) => state?.users
   );
-  console.log(userAuth, loading, error, success);
   //! Redirect
   useEffect(() => {
     if (

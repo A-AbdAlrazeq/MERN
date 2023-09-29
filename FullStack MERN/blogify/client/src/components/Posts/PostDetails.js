@@ -10,6 +10,7 @@ import ErrorMsg from "../Alert/ErrorMsg";
 import PostStats from "./PostStats";
 import calculateReadingTime from "../../utils/calculateReadingTime";
 import AddComment from "../Comments/AddComment";
+import LoadingComponent from "../Alert/LoadingComponent";
 const PostDetails = () => {
   //! navigation
   const navigate = useNavigate();
@@ -62,18 +63,24 @@ const PostDetails = () => {
         >
           <div className="container px-4 mx-auto">
             <div className="mx-auto mb-12 text-center md:max-w-2xl">
-              <div className="inline-block px-3 py-1 mb-6 text-xs font-medium leading-5 text-green-500 uppercase bg-green-100 rounded-full shadow-sm">
-                {post?.post?.category?.name}
-              </div>
-              <div className="flex items-center justify-center">
-                <p className="inline-block font-medium text-green-500">
-                  {post?.post?.author?.username}
-                </p>
-                <span className="mx-1 text-green-500">•</span>
-                <p className="inline-block font-medium text-green-500">
-                  {new Date(post?.post?.createdAt).toDateString()}
-                </p>
-              </div>
+              {/* Display the category name if available */}
+              {post?.post?.category?.name && (
+                <div className="inline-block px-3 py-1 mb-6 text-xs font-medium leading-5 text-green-500 uppercase bg-green-100 rounded-full shadow-sm">
+                  {post?.post?.category?.name}
+                </div>
+              )}
+              {/* Display the author's username if available */}
+              {post?.post?.author?.username && (
+                <div className="flex items-center justify-center">
+                  <p className="inline-block font-medium text-green-500">
+                    {post?.post?.author?.username}
+                  </p>
+                  <span className="mx-1 text-green-500">•</span>
+                  <p className="inline-block font-medium text-green-500">
+                    {new Date(post?.post?.createdAt).toDateString()}
+                  </p>
+                </div>
+              )}
               <h2 className="mb-4 text-3xl font-bold leading-tight tracking-tighter md:text-5xl text-darkCoolGray-900">
                 {post?.post?.title}
               </h2>

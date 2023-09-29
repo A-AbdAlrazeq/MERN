@@ -12,33 +12,31 @@ const CommentsList = ({ comments }) => {
           />
         </div>
         <div className="flex-grow">
-          <div>
-            {comments?.length <= 0 ? (
-              <h2>No Comments</h2>
-            ) : (
-              comments?.map((comment) => {
-                return (
-                  <>
-                    <div className="bg-blue-50 px-4 py-3 sm:px-6 flex justify-between items-center">
-                      <div>
-                        <h4 className="text-sm font-medium text-blue-600">
-                          {comment?.author?.username}
-                        </h4>
-                        <p className="text-sm text-gray-500">
-                          {new Date(comment?.createdAt).toDateString()}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="bg-blue-50 px-4 py-3 sm:px-6">
-                      <p className="mt-1 text-sm text-gray-700">
-                        {comment?.message}
-                      </p>
-                    </div>
-                  </>
-                );
-              })
-            )}
-          </div>
+          {Array.isArray(comments) && comments.length > 0 ? (
+            comments.map((comment) => (
+              <div key={comment._id}>
+                <div className="bg-blue-50 px-4 py-3 sm:px-6 flex justify-between items-center">
+                  <div>
+                    <h4 className="text-sm font-medium text-blue-600">
+                      {comment?.author?.username || "Unknown User"}
+                    </h4>
+                    <p className="text-sm text-gray-500">
+                      {comment?.createdAt
+                        ? new Date(comment?.createdAt).toDateString()
+                        : "Unknown Date"}
+                    </p>
+                  </div>
+                </div>
+                <div className="bg-blue-50 px-4 py-3 sm:px-6">
+                  <p className="mt-1 text-sm text-gray-700">
+                    {comment?.message || "Invalid Comment"}
+                  </p>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>No comments available.</p>
+          )}
         </div>
       </div>
     </div>
