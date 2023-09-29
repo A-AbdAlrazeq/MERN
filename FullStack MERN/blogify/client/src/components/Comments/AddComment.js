@@ -14,7 +14,8 @@ const AddComment = ({ postId, comments }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   //! get comment from store
-  const { success } = useSelector((state) => state?.comments);
+  const { success, loading } = useSelector((state) => state?.comments);
+  console.log(loading);
   //reload
   useEffect(() => {
     if (success) {
@@ -80,7 +81,7 @@ const AddComment = ({ postId, comments }) => {
         </div>
       </div>
       {/* comment lists */}
-      <CommentsList comments={comments} />
+      <CommentsList comments={comments} loading={loading} />
     </div>
   );
 };

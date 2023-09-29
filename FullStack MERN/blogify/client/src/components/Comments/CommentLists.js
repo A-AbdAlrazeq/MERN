@@ -1,6 +1,11 @@
 import React, { useState } from "react";
+import LoadingComponent from "../Alert/LoadingComponent";
 
-const CommentsList = ({ comments }) => {
+const CommentsList = ({ comments, loading }) => {
+  if (loading) {
+    // If loading is true, render a loading component
+    return <LoadingComponent />;
+  }
   return (
     <div className="flex flex-col space-y-4">
       <div className="flex space-x-4">
