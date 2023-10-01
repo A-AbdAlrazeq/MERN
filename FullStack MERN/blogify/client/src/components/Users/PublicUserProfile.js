@@ -1,7 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { userPublicProfileAction } from "../../redux/slices/users/usersSlices";
+import {
+  userPublicProfileAction,
+  blockUserAction,
+} from "../../redux/slices/users/usersSlices";
 import UserPosts from "./UserPosts";
 
 export default function PublicUserProfile() {
@@ -13,6 +16,10 @@ export default function PublicUserProfile() {
     dispatch(userPublicProfileAction(userId));
   }, [userId, dispatch]);
 
+  //!Block user handler
+  const blockUserHandler = () => {
+    dispatch(blockUserAction(userId));
+  };
   const { user, loading, error, profile } = useSelector(
     (state) => state?.users
   );
@@ -84,54 +91,30 @@ export default function PublicUserProfile() {
                             20
                           </button>
                           {/* block/unblock */}
-                          {/*  {hasBlocked ? (
-                            <button
-                              onClick={unBlockUserHandler}
-                              type="button"
-                              className="inline-flex justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+
+                          <button
+                            onClick={blockUserHandler}
+                            type="button"
+                            className="inline-flex justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                          >
+                            <svg
+                              className="-ml-0.5 h-5 w-5 text-gray-400"
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke-width="1.5"
+                              stroke="currentColor"
+                              class="w-6 h-6"
                             >
-                              <svg
-                                className="-ml-0.5 h-5 w-5 text-gray-400"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke-width="1.5"
-                                stroke="currentColor"
-                                class="w-6 h-6"
-                              >
-                                <path
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  d="M13.5 10.5V6.75a4.5 4.5 0 119 0v3.75M3.75 21.75h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H3.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
-                                />
-                              </svg>
-                              Unblock
-                            </button>
-                          ) : (
-                            <button
-                              onClick={blockUserHandler}
-                              type="button"
-                              className="inline-flex justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                            >
-                              <svg
-                                className="-ml-0.5 h-5 w-5 text-gray-400"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke-width="1.5"
-                                stroke="currentColor"
-                                class="w-6 h-6"
-                              >
-                                <path
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
-                                />
-                              </svg>
-                              Block
-                            </button>
-                          )}
- */}
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M13.5 10.5V6.75a4.5 4.5 0 119 0v3.75M3.75 21.75h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H3.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+                              />
+                            </svg>
+                            block
+                          </button>
+
                           {/* follow / unfollow */}
                           {/*   {hasfollowed ? (
                             <button
