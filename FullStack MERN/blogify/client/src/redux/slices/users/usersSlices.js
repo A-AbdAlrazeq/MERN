@@ -85,6 +85,28 @@ export const userPublicProfileAction = createAsyncThunk(
     }
   }
 );
+//! Get User Private Profile Action
+export const userPrivateProfileAction = createAsyncThunk(
+  "users/user-private-profile",
+  async (userId, { rejectWithValue, getState, dispatch }) => {
+    //make request
+    try {
+      const token = getState().users?.userAuth?.userInfo?.token;
+      const config = {
+        headers: {
+          Authorization: `Abd ${token}`,
+        },
+      };
+      const { data } = await axios.get(
+        `http://localhost:8000/api/v1/users/profile/`,
+        config
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
 //! Block User Action
 export const blockUserAction = createAsyncThunk(
   "users/block-user",
@@ -181,12 +203,27 @@ const userSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(userPublicProfileAction.fulfilled, (state, action) => {
-      state.profile = action.payload;
+      state.user = action.payload;
       state.success = true;
       state.loading = false;
       state.error = null;
     });
     builder.addCase(userPublicProfileAction.rejected, (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    });
+
+    //!get user private profile
+    builder.addCase(userPrivateProfileAction.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(userPrivateProfileAction.fulfilled, (state, action) => {
+      state.profile = action.payload;
+      state.success = true;
+      state.loading = false;
+      state.error = null;
+    });
+    builder.addCase(userPrivateProfileAction.rejected, (state, action) => {
       state.error = action.payload;
       state.loading = false;
     });

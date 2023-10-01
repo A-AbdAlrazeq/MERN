@@ -5,6 +5,7 @@ import {
   userPublicProfileAction,
   blockUserAction,
   unBlockUserAction,
+  userPrivateProfileAction,
 } from "../../redux/slices/users/usersSlices";
 import UserPosts from "./UserPosts";
 
@@ -24,10 +25,18 @@ export default function PublicUserProfile() {
   const { user, loading, error, profile } = useSelector(
     (state) => state?.users
   );
+  //! Get all the users the login user has blocked
+  const blockedUsers = profile?.user?.blockedUsers;
+
+  const hasBlocked = blockedUsers?.some((user) => user?._id === userId);
   //!unBlock user handler
   const unBlockUserHandler = () => {
     dispatch(unBlockUserAction(userId));
   };
+  // !get user private profile
+  useEffect(() => {
+    dispatch(userPrivateProfileAction());
+  }, [userId, dispatch, hasBlocked]);
 
   return (
     <>
@@ -42,10 +51,10 @@ export default function PublicUserProfile() {
                     <img
                       className="h-32 w-full object-cover lg:h-48"
                       src={
-                        profile?.user?.coverImage ||
+                        user?.user?.coverImage ||
                         "https://cdn.pixabay.com/photo/2020/02/06/15/59/forest-4824759_1280.png"
                       }
-                      alt={profile?.user?.username}
+                      alt={user?.user?.username}
                     />
                   </div>
 
@@ -55,16 +64,16 @@ export default function PublicUserProfile() {
                         <img
                           className="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32"
                           src={
-                            profile?.user?.profilePicture ||
+                            user?.user?.profilePicture ||
                             "https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375_1280.png"
                           }
-                          alt={profile?.user?.username}
+                          alt={user?.user?.username}
                         />
                       </div>
                       <div className="mt-6 sm:flex sm:min-w-0 sm:flex-1 sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
                         <div className="mt-6 min-w-0 flex-1 2xl:block">
                           <h1 className="truncate text-2xl font-bold text-gray-900">
-                            {profile?.user?.username}
+                            {user?.user?.username}
                           </h1>
                         </div>
                         <div className="justify-stretch mt-6 flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
@@ -96,50 +105,53 @@ export default function PublicUserProfile() {
                             20
                           </button>
                           {/* block/unblock */}
-                          <button
-                            onClick={blockUserHandler}
-                            type="button"
-                            className="inline-flex justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                          >
-                            <svg
-                              className="-ml-0.5 h-5 w-5 text-gray-400"
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke-width="1.5"
-                              stroke="currentColor"
-                              class="w-6 h-6"
+                          {hasBlocked ? (
+                            <button
+                              onClick={unBlockUserHandler}
+                              type="button"
+                              className="inline-flex justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                             >
-                              <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
-                              />
-                            </svg>
-                            Block
-                          </button>
-                          <button
-                            onClick={unBlockUserHandler}
-                            type="button"
-                            className="inline-flex justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                          >
-                            <svg
-                              className="-ml-0.5 h-5 w-5 text-gray-400"
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke-width="1.5"
-                              stroke="currentColor"
-                              class="w-6 h-6"
+                              <svg
+                                className="-ml-0.5 h-5 w-5 text-gray-400"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-6 h-6"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  d="M13.5 10.5V6.75a4.5 4.5 0 119 0v3.75M3.75 21.75h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H3.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+                                />
+                              </svg>
+                              Unblock
+                            </button>
+                          ) : (
+                            <button
+                              onClick={blockUserHandler}
+                              type="button"
+                              className="inline-flex justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                             >
-                              <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M13.5 10.5V6.75a4.5 4.5 0 119 0v3.75M3.75 21.75h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H3.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
-                              />
-                            </svg>
-                            Unblock
-                          </button>
+                              <svg
+                                className="-ml-0.5 h-5 w-5 text-gray-400"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-6 h-6"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+                                />
+                              </svg>
+                              Block
+                            </button>
+                          )}
 
                           {/* follow / unfollow */}
                           {/*   {hasfollowed ? (
@@ -203,7 +215,7 @@ export default function PublicUserProfile() {
                         Email
                       </dt>
                       <dd className="mt-1 text-sm text-gray-900">
-                        {profile?.user?.email}
+                        {user?.user?.email}
                       </dd>
                     </div>
                   </dl>
