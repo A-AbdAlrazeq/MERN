@@ -6,6 +6,8 @@ import {
   blockUserAction,
   unBlockUserAction,
   userPrivateProfileAction,
+  followUserAction,
+  unFollowUserAction,
 } from "../../redux/slices/users/usersSlices";
 import UserPosts from "./UserPosts";
 
@@ -18,7 +20,7 @@ export default function PublicUserProfile() {
     dispatch(userPublicProfileAction(userId));
   }, [userId, dispatch]);
 
-  //!Block user handler
+  //Block user handler
   const blockUserHandler = () => {
     dispatch(blockUserAction(userId));
   };
@@ -32,6 +34,19 @@ export default function PublicUserProfile() {
   //!unBlock user handler
   const unBlockUserHandler = () => {
     dispatch(unBlockUserAction(userId));
+  };
+  //! Get all the users the login user has follow
+  const followedUsers = profile?.user?.following;
+
+  const hasFollowed = followedUsers?.some((user) => user?._id === userId);
+  //follow user handler
+  const followUserHandler = () => {
+    dispatch(followUserAction(userId));
+  };
+
+  //!unFollow user handler
+  const unFollowUserHandler = () => {
+    dispatch(unFollowUserAction(userId));
   };
   // !get user private profile
   useEffect(() => {
@@ -153,10 +168,10 @@ export default function PublicUserProfile() {
                             </button>
                           )}
 
-                          {/* follow / unfollow */}
-                          {/*   {hasfollowed ? (
+                          {/* follow / unFollow */}
+                          {hasFollowed ? (
                             <button
-                              onClick={unfollowUserHandler}
+                              onClick={unFollowUserHandler}
                               type="button"
                               className="inline-flex justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                             >
@@ -175,7 +190,7 @@ export default function PublicUserProfile() {
                                   d="M22 10.5h-6m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"
                                 />
                               </svg>
-                              Follow
+                              UnFollow
                             </button>
                           ) : (
                             <button
@@ -200,7 +215,7 @@ export default function PublicUserProfile() {
                               </svg>
                               Follow
                             </button>
-                          )} */}
+                          )}
                         </div>
                       </div>
                     </div>
