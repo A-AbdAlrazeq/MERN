@@ -46,7 +46,7 @@ const Login = () => {
       userAuth?.userInfo?.token &&
       error?.message !== "Token expired/Invalid"
     ) {
-      navigate("/profile");
+      navigate("/user-profile");
     }
   }, [userAuth?.userInfo?.token]);
 

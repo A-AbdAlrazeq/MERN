@@ -2,6 +2,8 @@ import { AiFillCamera } from "react-icons/ai";
 import { userPrivateProfileAction } from "../../redux/slices/users/usersSlices";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import UserPosts from "./UserPosts";
+import Followers from "./Followers";
 const profile = {
   name: "Ricardo Cooper",
   imageUrl:
@@ -160,9 +162,10 @@ export default function PrivateUserProfile() {
                   </dl>
                 </div>
                 {/* Posts Lists */}
+                <UserPosts posts={profile?.user?.posts} />
                 {/* <UserPosts /> */}
                 {/* Followers */}
-                {/* <Followers /> */}
+                <Followers followers={profile?.user?.followers} />
                 {/* Followed Users */}
                 {/* <UsersLists /> */}
               </article>
