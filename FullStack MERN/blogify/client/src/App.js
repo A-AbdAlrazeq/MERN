@@ -12,6 +12,7 @@ import AddPost from "./components/Posts/AddPost";
 import PostDetails from "./components/Posts/PostDetails";
 import PostsLists from "./components/Posts/PostsLists";
 import UpdatePost from "./components/Posts/UpdatePost";
+import PrivateUserProfile from "./components/Users/PrivateUserProfile";
 export default function App() {
   //! Get the login user from store
   const { userAuth } = useSelector((state) => state?.users);
@@ -24,7 +25,7 @@ export default function App() {
         <Route path="/" element={<Homepage />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
-        {/* Profile */}
+        {/* Public user Profile */}
         <Route
           path="/user-public-profile/:userId"
           element={
@@ -33,6 +34,16 @@ export default function App() {
             </ProtectedRoute>
           }
         ></Route>
+        {/* Private User Profile */}
+        <Route
+          path="/user-profile"
+          element={
+            <ProtectedRoute>
+              <PrivateUserProfile />
+            </ProtectedRoute>
+          }
+        ></Route>
+
         {/* Add Post */}
         <Route
           path="/add-post"
