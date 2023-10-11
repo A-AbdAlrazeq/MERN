@@ -395,3 +395,59 @@ exports.verifyAccount = expressAsyncHandler(async (req, res) => {
   await userFound.save();
   res.status(200).json({ message: "Account  successfully verified" });
 });
+
+//@desc  Upload profile image
+//@route  PUT /api/v1/users/upload-profile-image
+//@access Private
+
+exports.uploadProfilePicture = asyncHandler(async (req, res) => {
+  // Find the user
+  const userFound = await User.findById(req?.userAuth?._id);
+  if (!userFound) {
+    throw new Error("User not found");
+  }
+  const user = await User.findByIdAndUpdate(
+    req?.userAuth?._id,
+    {
+      $set: { profilePicture: req?.file?.path },
+    },
+    {
+      new: true,
+    }
+  );
+
+  //? send the response
+  res.json({
+    status: "success",
+    message: "User profile image updated Successfully",
+    user,
+  });
+});
+
+//@desc   Upload cover image
+//@route  PUT /api/v1/users/upload-cover-image
+//@access Private
+
+exports.uploadCoverImage = asyncHandler(async (req, res) => {
+  // Find the user
+  const userFound = await User.findById(req?.userAuth?._id);
+  if (!userFound) {
+    throw new Error("User not found");
+  }
+  const user = await User.findByIdAndUpdate(
+    req?.userAuth?._id,
+    {
+      $set: { coverImage: req?.file?.path },
+    },
+    {
+      new: true,
+    }
+  );
+
+  //? send the response
+  res.json({
+    status: "success",
+    message: "User cover image updated Successfully",
+    user,
+  });
+});

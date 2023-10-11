@@ -14,6 +14,8 @@ const {
   accountVerificationEmail,
   verifyAccount,
   getPublicProfile,
+  uploadProfilePicture,
+  uploadCoverImage,
 } = require("../../controllers/Users/UserController");
 const isLogin = require("../../middleware/isLogin");
 const storage = require("../../utils/fileUpload");
@@ -25,6 +27,20 @@ const upload = multer({ storage });
 usersRouter.post("/register", register);
 //!login
 usersRouter.post("/login", login);
+// upload profile image
+usersRouter.put(
+  "/upload-profile-image",
+  isLogin,
+  upload.single("file"),
+  uploadProfilePicture
+);
+// upload cover image
+usersRouter.put(
+  "/upload-cover-image",
+  isLogin,
+  upload.single("file"),
+  uploadCoverImage
+);
 //!profile
 usersRouter.get("/profile", isLogin, getProfile);
 // public profile
