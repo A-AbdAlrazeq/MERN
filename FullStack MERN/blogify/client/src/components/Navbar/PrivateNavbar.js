@@ -80,10 +80,10 @@ export default function PrivateNavbar() {
                         <img
                           className="h-8 w-8 rounded-full"
                           src={
-                            profile?.user?.profilePicture ||
+                            userAuth?.userInfo?.profilePicture ||
                             "https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375_1280.png"
                           }
-                          alt={profile?.user?.username}
+                          alt={userAuth?.userInfo?.username}
                         />
                       </Menu.Button>
                     </div>
