@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { PlusIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
 import { FaBlog } from "react-icons/fa";
@@ -80,10 +80,10 @@ export default function PrivateNavbar() {
                         <img
                           className="h-8 w-8 rounded-full"
                           src={
-                            userAuth?.userInfo?.profilePicture ||
+                            profile?.user?.profilePicture ||
                             "https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375_1280.png"
                           }
-                          alt={userAuth?.userInfo?.username}
+                          alt={profile?.user?.username}
                         />
                       </Menu.Button>
                     </div>
@@ -166,17 +166,17 @@ export default function PrivateNavbar() {
                   <img
                     className="h-10 w-10 rounded-full"
                     src={
-                      userAuth?.userInfo?.profilePicture ||
+                      profile?.user?.profilePicture ||
                       "https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375_1280.png"
                     }
                   />
                 </div>
                 <div className="ml-3">
                   <div className="text-base font-medium text-gray-800">
-                    {userAuth?.userInfo?.username}
+                    {profile?.user?.username}
                   </div>
                   <div className="text-sm font-medium text-gray-500">
-                    {userAuth?.userInfo?.email}
+                    {profile?.user?.email}
                   </div>
                 </div>
                 {/* <button

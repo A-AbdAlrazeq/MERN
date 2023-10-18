@@ -13,6 +13,8 @@ import PostDetails from "./components/Posts/PostDetails";
 import PostsLists from "./components/Posts/PostsLists";
 import UpdatePost from "./components/Posts/UpdatePost";
 import PrivateUserProfile from "./components/Users/PrivateUserProfile";
+import UploadProfileImage from "./components/Users/UploadProfileImage";
+import UploadCoverImage from "./components/Users/UploadCoverImage";
 export default function App() {
   //! Get the login user from store
   const { userAuth } = useSelector((state) => state?.users);
@@ -59,6 +61,24 @@ export default function App() {
           element={
             <ProtectedRoute>
               <PostDetails />
+            </ProtectedRoute>
+          }
+        ></Route>
+        {/* upload profile image */}
+        <Route
+          path="/upload-profile-image"
+          element={
+            <ProtectedRoute>
+              <UploadProfileImage />
+            </ProtectedRoute>
+          }
+        ></Route>
+        {/* upload cover image */}
+        <Route
+          path="/upload-cover-image"
+          element={
+            <ProtectedRoute>
+              <UploadCoverImage />
             </ProtectedRoute>
           }
         ></Route>

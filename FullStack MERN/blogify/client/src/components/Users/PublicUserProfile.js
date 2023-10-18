@@ -66,10 +66,10 @@ export default function PublicUserProfile() {
                     <img
                       className="h-32 w-full object-cover lg:h-48"
                       src={
-                        user?.user?.coverImage ||
+                        profile?.user?.coverImage ||
                         "https://cdn.pixabay.com/photo/2020/02/06/15/59/forest-4824759_1280.png"
                       }
-                      alt={user?.user?.username}
+                      alt={profile?.user?.username}
                     />
                   </div>
 
@@ -79,10 +79,10 @@ export default function PublicUserProfile() {
                         <img
                           className="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32"
                           src={
-                            user?.user?.profilePicture ||
+                            profile?.user?.profilePicture ||
                             "https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375_1280.png"
                           }
-                          alt={user?.user?.username}
+                          alt={profile?.user?.username}
                         />
                       </div>
                       <div className="mt-6 sm:flex sm:min-w-0 sm:flex-1 sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
