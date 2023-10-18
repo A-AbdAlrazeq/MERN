@@ -68,6 +68,7 @@ exports.login = asyncHandler(async (req, res) => {
     role: user?.role,
     token: generateToken(user),
     profilePicture: user?.profilePicture,
+    isVerified: user?.isVerified,
   });
 });
 

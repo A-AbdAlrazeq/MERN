@@ -1,5 +1,6 @@
 import { AiFillCamera } from "react-icons/ai";
 import { userPrivateProfileAction } from "../../redux/slices/users/usersSlices";
+import { ExclamationTriangleIcon } from "@heroicons/react/20/solid";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import UserPosts from "./UserPosts";
@@ -71,6 +72,25 @@ export default function PrivateUserProfile() {
                             {profile?.user?.username}
                           </h1>
                         </div>
+                        {/* Warning */}
+
+                        {!userAuth?.userInfo?.isVerified && (
+                          <button className="rounded-md mt-6 bg-yellow-50 p-4">
+                            <div className="flex">
+                              <div className="flex-shrink-0">
+                                <ExclamationTriangleIcon
+                                  className="h-5 w-5 text-yellow-400"
+                                  aria-hidden="true"
+                                />
+                              </div>
+                              <div className="ml-3">
+                                <h3 className="text-sm font-medium text-yellow-800">
+                                  Click here to verify your account
+                                </h3>
+                              </div>
+                            </div>
+                          </button>
+                        )}
                         <div className="flex flex-col mt-6 space-y-3 justify-stretch sm:flex-row sm:space-y-0 sm:space-x-4">
                           {/* Profile Views */}
                           <button
