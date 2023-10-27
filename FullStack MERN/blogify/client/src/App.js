@@ -15,6 +15,7 @@ import UpdatePost from "./components/Posts/UpdatePost";
 import PrivateUserProfile from "./components/Users/PrivateUserProfile";
 import UploadProfileImage from "./components/Users/UploadProfileImage";
 import UploadCoverImage from "./components/Users/UploadCoverImage";
+import AccountVerification from "./components/Users/AccountVerification";
 export default function App() {
   //! Get the login user from store
   const { userAuth } = useSelector((state) => state?.users);
@@ -79,6 +80,15 @@ export default function App() {
           element={
             <ProtectedRoute>
               <UploadCoverImage />
+            </ProtectedRoute>
+          }
+        ></Route>
+        {/* Verify account */}
+        <Route
+          path="/verify-account/:token"
+          element={
+            <ProtectedRoute>
+              <AccountVerification />
             </ProtectedRoute>
           }
         ></Route>

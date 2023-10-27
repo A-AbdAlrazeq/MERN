@@ -66,5 +66,5 @@ usersRouter.put(
   accountVerificationEmail
 );
 // send account verification email
-usersRouter.put("/account-verification/:verifyToken", isLogin, verifyAccount);
+usersRouter.get("/account-verification/:verifyToken", isLogin, verifyAccount);
 module.exports = usersRouter;
