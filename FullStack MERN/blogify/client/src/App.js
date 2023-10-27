@@ -16,6 +16,7 @@ import PrivateUserProfile from "./components/Users/PrivateUserProfile";
 import UploadProfileImage from "./components/Users/UploadProfileImage";
 import UploadCoverImage from "./components/Users/UploadCoverImage";
 import AccountVerification from "./components/Users/AccountVerification";
+import PasswordResetRequest from "./components/Users/PasswordResetRequest";
 export default function App() {
   //! Get the login user from store
   const { userAuth } = useSelector((state) => state?.users);
@@ -91,6 +92,11 @@ export default function App() {
               <AccountVerification />
             </ProtectedRoute>
           }
+        ></Route>
+        {/* forgot password request */}
+        <Route
+          path="/forgot-password"
+          element={<PasswordResetRequest />}
         ></Route>
         {/*update Post */}
         <Route

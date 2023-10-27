@@ -296,6 +296,24 @@ export const verifyAccountAction = createAsyncThunk(
     }
   }
 );
+//!forgot password Action
+export const forgotPasswordAction = createAsyncThunk(
+  "users/forgot-password",
+  async (payload, { rejectWithValue, getState, dispatch }) => {
+    //make request
+    try {
+      const { data } = await axios.post(
+        `http://localhost:8000/api/v1/users/forgot-password`,
+        payload
+      );
+      //! save the user into localStorage
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      return data;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
 // ! Logout action
 export const logoutAction = createAsyncThunk("users/logout", async () => {
   //remove token from localStorage
@@ -485,6 +503,21 @@ const userSlice = createSlice({
       state.error = null;
     });
     builder.addCase(verifyAccountAction.rejected, (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    });
+    //!forgot password
+    builder.addCase(forgotPasswordAction.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(forgotPasswordAction.fulfilled, (state, action) => {
+      state.isEmailSent = true;
+      state.emailMessage = action.payload;
+      state.success = true;
+      state.loading = false;
+      state.error = null;
+    });
+    builder.addCase(forgotPasswordAction.rejected, (state, action) => {
       state.error = action.payload;
       state.loading = false;
     });
