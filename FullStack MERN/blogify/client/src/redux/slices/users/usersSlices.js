@@ -251,6 +251,30 @@ export const uploadProfileImageAction = createAsyncThunk(
     }
   }
 );
+//! Send Account verification email Action
+export const sendAccVerificationEmailAction = createAsyncThunk(
+  "users/send-account-verification-email",
+  async (userId, { rejectWithValue, getState, dispatch }) => {
+    //make request
+    try {
+      const token = getState().users?.userAuth?.userInfo?.token;
+      const config = {
+        headers: {
+          Authorization: `Abd ${token}`,
+        },
+      };
+      const { data } = await axios.put(
+        `http://localhost:8000/api/v1/users/account-verification-email`,
+        {},
+        config
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
 // ! Logout action
 export const logoutAction = createAsyncThunk("users/logout", async () => {
   //remove token from localStorage
@@ -355,7 +379,6 @@ const userSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     });
-
     //!block user
     builder.addCase(blockUserAction.pending, (state, action) => {
       state.loading = true;
@@ -412,6 +435,25 @@ const userSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     });
+    //!Send Account verification email
+    builder.addCase(sendAccVerificationEmailAction.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(
+      sendAccVerificationEmailAction.fulfilled,
+      (state, action) => {
+        state.isEmailSent = true;
+        state.loading = false;
+        state.error = null;
+      }
+    );
+    builder.addCase(
+      sendAccVerificationEmailAction.rejected,
+      (state, action) => {
+        state.error = action.payload;
+        state.loading = false;
+      }
+    );
     //! Reset error action
     builder.addCase(resetErrorAction.fulfilled, (state) => {
       state.error = null;

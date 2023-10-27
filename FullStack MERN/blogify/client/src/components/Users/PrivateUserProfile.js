@@ -1,10 +1,14 @@
 import { AiFillCamera } from "react-icons/ai";
-import { userPrivateProfileAction } from "../../redux/slices/users/usersSlices";
+import {
+  userPrivateProfileAction,
+  sendAccVerificationEmailAction,
+} from "../../redux/slices/users/usersSlices";
 import { ExclamationTriangleIcon } from "@heroicons/react/20/solid";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import UserPosts from "./UserPosts";
 import Followers from "./Followers";
+import SuccessMsg from "../Alert/SuccessMsg";
 export default function PrivateUserProfile() {
   //! Get data from store
   const dispatch = useDispatch();
@@ -12,12 +16,19 @@ export default function PrivateUserProfile() {
   useEffect(() => {
     dispatch(userPrivateProfileAction());
   }, [dispatch]);
-
-  const { user, loading, error, profile, userAuth } = useSelector(
+  // ! Send acc verification email handler
+  const sendAccVerificationEmailHandler = () => {
+    dispatch(sendAccVerificationEmailAction());
+  };
+  const { user, loading, error, profile, userAuth, isEmailSent } = useSelector(
     (state) => state?.users
   );
   return (
     <>
+      {/* success msg */}
+      {isEmailSent && (
+        <SuccessMsg message="Email successfully sent, check your email" />
+      )}
       <div className="flex h-full">
         <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
           <div className="relative z-0 flex flex-1 overflow-hidden">
@@ -75,7 +86,10 @@ export default function PrivateUserProfile() {
                         {/* Warning */}
 
                         {!userAuth?.userInfo?.isVerified && (
-                          <button className="rounded-md mt-6 bg-yellow-50 p-4">
+                          <button
+                            onClick={sendAccVerificationEmailHandler}
+                            className="rounded-md mt-6 bg-yellow-50 p-4"
+                          >
                             <div className="flex">
                               <div className="flex-shrink-0">
                                 <ExclamationTriangleIcon
