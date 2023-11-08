@@ -456,3 +456,35 @@ exports.uploadCoverImage = asyncHandler(async (req, res) => {
     user,
   });
 });
+
+//@desc   Update username/email
+//@route  PUT /api/v1/users/update-profile
+//@access Private
+
+exports.updateUserProfile = asyncHandler(async (req, res) => {
+  //!Check if the user exists
+  const userId = req.userAuth?._id;
+  const userFound = await User.findById(userId);
+  if (!userFound) {
+    throw new Error("User not found");
+  }
+  console.log(userFound);
+  //! email,username update
+  const { username, email } = req.body;
+  const post = await User.findByIdAndUpdate(
+    userId,
+    {
+      email: email ? email : userFound?.email,
+      username: username ? username : userFound?.username,
+    },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+  res.status(201).json({
+    status: "success",
+    message: "Data successfully updated",
+    post,
+  });
+});

@@ -16,6 +16,7 @@ const {
   getPublicProfile,
   uploadProfilePicture,
   uploadCoverImage,
+  updateUserProfile,
 } = require("../../controllers/Users/UserController");
 const isLogin = require("../../middleware/isLogin");
 const storage = require("../../utils/fileUpload");
@@ -41,10 +42,13 @@ usersRouter.put(
   upload.single("file"),
   uploadCoverImage
 );
-//!profile
+//profile
 usersRouter.get("/profile", isLogin, getProfile);
 // public profile
 usersRouter.get("/public-profile/:userId", getPublicProfile);
+//update profile
+usersRouter.put("/update-profile/", isLogin, updateUserProfile);
+
 // block user
 usersRouter.put("/block/:userIdToBlock", isLogin, blockUser);
 // unblock user
