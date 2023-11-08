@@ -306,6 +306,9 @@ exports.unFollowingUser = asyncHandler(async (req, res) => {
 
 exports.forgotPassword = expressAsyncHandler(async (req, res) => {
   const { email } = req.body;
+  if (!email) {
+    throw new Error(" Email should not be empty");
+  }
   //Find the email in our db
   const userFound = await User.findOne({ email });
   if (!userFound) {
