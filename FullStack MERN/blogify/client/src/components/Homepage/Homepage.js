@@ -3,7 +3,6 @@ import { FaBookOpen } from "react-icons/fa";
 import Register from "../Users/Register";
 
 import PublicPosts from "../Posts/PublicPosts";
-import { Link } from "react-router-dom";
 
 const Homepage = () => {
   return (

@@ -1,20 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchPrivatePostsAction,
-  fetchPublicPostsAction,
-} from "../../redux/slices/posts/postsSlice";
+import { fetchPrivatePostsAction } from "../../redux/slices/posts/postsSlice";
 import LoadingComponent from "../Alert/LoadingComponent";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchCategoriesAction } from "../../redux/slices/categories/categoriesSlice";
-//import truncatePost from "../../utils/truncatePost";
 
 const PostLists = () => {
   //! redux store
   const dispatch = useDispatch();
-  const { posts, error, loading, success } = useSelector(
-    (state) => state?.posts
-  );
+  const { posts, error, loading } = useSelector((state) => state?.posts);
   //redirect if token expired
   const navigate = useNavigate();
   useEffect(() => {
@@ -31,6 +25,7 @@ const PostLists = () => {
   //dispatch fetching posts
   useEffect(() => {
     dispatch(fetchPrivatePostsAction({ page, limit: 4, searchTerm, category }));
+    //dispatch category action
     dispatch(fetchCategoriesAction());
   }, [dispatch, page, searchTerm, category]);
 

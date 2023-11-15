@@ -19,6 +19,7 @@ import AccountVerification from "./components/Users/AccountVerification";
 import PasswordResetRequest from "./components/Users/PasswordResetRequest";
 import PasswordReset from "./components/Users/PasswordReset";
 import UpdateUser from "./components/Users/UpdateUser";
+import SchedulePost from "./components/Posts/SchedulePost";
 export default function App() {
   //! Get the login user from store
   const { userAuth } = useSelector((state) => state?.users);
@@ -49,11 +50,21 @@ export default function App() {
             </ProtectedRoute>
           }
         ></Route>
+        {/* update User Profile */}
         <Route
           path="/update-profile"
           element={
             <ProtectedRoute>
               <UpdateUser />
+            </ProtectedRoute>
+          }
+        ></Route>
+        {/*Schedule Post*/}
+        <Route
+          path="/posts/schedule/:postId"
+          element={
+            <ProtectedRoute>
+              <SchedulePost />
             </ProtectedRoute>
           }
         ></Route>
