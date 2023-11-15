@@ -14,19 +14,9 @@ const UpdateUser = () => {
   );
 
   const [formData, setFormData] = useState({
-    email: "",
-    username: "",
+    email: userAuth?.userInfo?.email,
+    username: userAuth?.userInfo?.username,
   });
-
-  useEffect(() => {
-    // Check if userAuth.userInfo is available before setting the initial state
-    if (userAuth?.userInfo) {
-      setFormData({
-        email: userAuth.userInfo.email || "",
-        username: userAuth.userInfo.username || "",
-      });
-    }
-  }, [userAuth.userInfo]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -39,7 +29,15 @@ const UpdateUser = () => {
         username: formData.username,
         email: formData.email,
       })
-    );
+    ).then(() => {
+      // If the update was successful, update localStorage
+      const updatedUserInfo = {
+        ...JSON.parse(localStorage.getItem("userInfo")),
+        username: formData.username,
+        email: formData.email,
+      };
+      localStorage.setItem("userInfo", JSON.stringify(updatedUserInfo));
+    });
   };
 
   useEffect(() => {
