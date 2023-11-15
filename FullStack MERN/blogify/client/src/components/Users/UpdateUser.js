@@ -9,7 +9,7 @@ import SuccessMsg from "../Alert/SuccessMsg";
 
 const UpdateUser = () => {
   const dispatch = useDispatch();
-  const { loading, error, success, userAuth, isUpdated } = useSelector(
+  const { loading, error, userAuth, isUpdated } = useSelector(
     (state) => state?.users
   );
 
