@@ -468,9 +468,11 @@ exports.updateUserProfile = asyncHandler(async (req, res) => {
   if (!userFound) {
     throw new Error("User not found");
   }
-  console.log(userFound);
   //! email,username update
   const { username, email } = req.body;
+  if ((!email && !username) || (!userFound?.email && userFound?.username)) {
+    throw new Error("email & username can't be empty");
+  }
   const post = await User.findByIdAndUpdate(
     userId,
     {

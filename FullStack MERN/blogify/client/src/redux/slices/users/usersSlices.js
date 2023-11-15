@@ -251,6 +251,30 @@ export const uploadProfileImageAction = createAsyncThunk(
     }
   }
 );
+//! update user profile Action
+export const updateUserProfileAction = createAsyncThunk(
+  "users/update-user-profile",
+  async (payload, { rejectWithValue, getState, dispatch }) => {
+    //make request
+    console.log(payload);
+    try {
+      const token = getState().users?.userAuth?.userInfo?.token;
+      const config = {
+        headers: {
+          Authorization: `Abd ${token}`,
+        },
+      };
+      const { data } = await axios.put(
+        `http://localhost:8000/api/v1/users/update-profile/`,
+        payload,
+        config
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
 //! Send Account verification email Action
 export const sendAccVerificationEmailAction = createAsyncThunk(
   "users/send-account-verification-email",
@@ -541,7 +565,22 @@ const userSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     });
-    //reset password
+    //!Update user profile
+    builder.addCase(updateUserProfileAction.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(updateUserProfileAction.fulfilled, (state, action) => {
+      state.user = action.payload;
+      state.isUpdated = true;
+      state.loading = false;
+      state.error = null;
+    });
+    builder.addCase(updateUserProfileAction.rejected, (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+      state.isUpdated = false;
+    });
+    //!reset password
     builder.addCase(passwordResetAction.pending, (state, action) => {
       state.loading = true;
     });
