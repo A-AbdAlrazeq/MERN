@@ -75,6 +75,8 @@ exports.getPosts = asyncHandler(async (req, res) => {
   // Extract the IDs of users who have blocked the logged-in user
   const blockingUsersIds = usersBlockingLoggedInUser?.map((user) => user?._id);
   //filter all post from the user that has blocked the login user using not included(nin) & get post when date less or equal current date or equal null
+  //! Get the category from request
+  const category = req.query.category;
   let query = {
     author: { $nin: blockingUsersIds },
     $or: [
@@ -84,6 +86,10 @@ exports.getPosts = asyncHandler(async (req, res) => {
       },
     ],
   };
+  //! check if category is specified, then add to the query
+  if (category) {
+    query.category = category;
+  }
   let posts = await Post.find(query)
     .populate({
       path: "author",
