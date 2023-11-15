@@ -94,13 +94,38 @@ exports.getPosts = asyncHandler(async (req, res) => {
   if (searchTerm) {
     query.title = { $regex: searchTerm, $options: "i" };
   }
-  let posts = await Post.find(query)
+  //Pagination parameters from request
+  const page = parseInt(req.query.page, 10) || 1;
+  const limit = parseInt(req.query.limit, 10) || 5;
+  const startIndex = (page - 1) * limit;
+  const endIndex = page * limit;
+  const total = await Post.countDocuments(query);
+
+  const posts = await Post.find(query)
     .populate({
       path: "author",
       model: "User",
       select: "email role username",
     })
-    .populate("category");
+    .populate("category")
+    .skip(startIndex)
+    .limit(limit)
+    .sort({ createdAt: -1 });
+  // Pagination result
+  const pagination = {};
+  if (endIndex < total) {
+    pagination.next = {
+      page: page + 1,
+      limit,
+    };
+  }
+
+  if (startIndex > 0) {
+    pagination.prev = {
+      page: page - 1,
+      limit,
+    };
+  }
   res.status(201).json({
     status: "success",
     message: "Posts successfully fetched",
