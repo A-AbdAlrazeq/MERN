@@ -241,6 +241,34 @@ export const posViewsCountAction = createAsyncThunk(
     }
   }
 );
+//!schedule post
+export const schedulePostAction = createAsyncThunk(
+  "posts/schedule-post",
+  async (
+    { postId, scheduledPublish },
+    { rejectWithValue, getState, dispatch }
+  ) => {
+    //make request
+    try {
+      const token = getState().users?.userAuth?.userInfo?.token;
+      const config = {
+        headers: {
+          Authorization: `Abd ${token}`,
+        },
+      };
+      const { data } = await axios.put(
+        `http://localhost:8000/api/v1/posts/schedule/${postId}`,
+        {
+          scheduledPublish,
+        },
+        config
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
 //! post slices
 const postSlice = createSlice({
   name: "posts",
@@ -371,6 +399,20 @@ const postSlice = createSlice({
       state.error = null;
     });
     builder.addCase(posViewsCountAction.rejected, (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    });
+    //! schedule post
+    builder.addCase(schedulePostAction.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(schedulePostAction.fulfilled, (state, action) => {
+      state.post = action.payload;
+      state.success = true;
+      state.loading = false;
+      state.error = null;
+    });
+    builder.addCase(schedulePostAction.rejected, (state, action) => {
       state.error = action.payload;
       state.loading = false;
     });
