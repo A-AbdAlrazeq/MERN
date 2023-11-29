@@ -478,6 +478,16 @@ exports.updateUserProfile = asyncHandler(async (req, res) => {
   if (!email || !username) {
     throw new Error("email & username can't be empty");
   }
+  //! Check if username exists
+  const user = await User.findOne({ username });
+  if (user && username != userFound?.username) {
+    throw new Error("User Already used");
+  }
+  //! Check if email exists
+  const Email = await User.findOne({ email });
+  if (Email && email != userFound?.email) {
+    throw new Error("email Already used");
+  }
   const post = await User.findByIdAndUpdate(
     userId,
     {
