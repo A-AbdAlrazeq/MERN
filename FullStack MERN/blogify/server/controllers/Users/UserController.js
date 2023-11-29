@@ -18,6 +18,11 @@ exports.register = asyncHandler(async (req, res) => {
     throw new Error("User Already Exists");
   }
   //Register new user
+  //! Check if email exists
+  const Email = await User.findOne({ email });
+  if (Email) {
+    throw new Error("email Already used");
+  }
   const newUser = new User({
     username,
     email,
