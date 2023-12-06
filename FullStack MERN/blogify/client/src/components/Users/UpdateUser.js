@@ -12,7 +12,7 @@ const UpdateUser = () => {
   const { loading, error, userAuth, isUpdated } = useSelector(
     (state) => state?.users
   );
-
+  console.log(error);
   const [formData, setFormData] = useState({
     email: userAuth?.userInfo?.email,
     username: userAuth?.userInfo?.username,
@@ -24,20 +24,34 @@ const UpdateUser = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(
-      updateUserProfileAction({
-        username: formData.username,
-        email: formData.email,
-      })
-    ).then(() => {
-      // If the update was successful, update localStorage
-      const updatedUserInfo = {
-        ...JSON.parse(localStorage.getItem("userInfo")),
-        username: formData.username,
-        email: formData.email,
-      };
-      localStorage.setItem("userInfo", JSON.stringify(updatedUserInfo));
-    });
+
+    // Check if there is an error
+    if (!error) {
+      dispatch(
+        updateUserProfileAction({
+          username: formData.username,
+          email: formData.email,
+        })
+      )
+        .then(() => {
+          // If the update was successful, update localStorage
+          const updatedUserInfo = {
+            ...JSON.parse(localStorage.getItem("userInfo")),
+            username: formData.username,
+            email: formData.email,
+          };
+          localStorage.setItem("userInfo", JSON.stringify(updatedUserInfo));
+        })
+        .catch((error) => {
+          // Handle the update error
+          console.error("Error updating profile:", error.message);
+          // Optionally, you can reset the form data to the previous values here
+          setFormData({
+            email: userAuth?.userInfo?.email,
+            username: userAuth?.userInfo?.username,
+          });
+        });
+    }
   };
 
   useEffect(() => {
