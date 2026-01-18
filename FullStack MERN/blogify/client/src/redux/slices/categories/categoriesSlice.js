@@ -5,7 +5,7 @@ import {
   resetErrorAction,
   resetSuccessAction,
 } from "../globalSlice/globalSlice";
-//import BASE_URL from "../../../utils/baseURL";
+import BASE_URL from "../../../utils/baseURL";
 
 //initialState
 const INITIAL_STATE = {
@@ -21,9 +21,43 @@ export const fetchCategoriesAction = createAsyncThunk(
   "categories/lists",
   async (payload, { rejectWithValue, getState, dispatch }) => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:8000/api/v1/categories`
-      );
+      const { data } = await axios.get(`${BASE_URL}/categories`);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
+export const seedDefaultCategoriesAction = createAsyncThunk(
+  "categories/seed-defaults",
+  async (payload, { rejectWithValue, getState }) => {
+    try {
+      const token = getState().users?.userAuth?.userInfo?.token;
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const { data } = await axios.post(`${BASE_URL}/categories/seed-defaults`, {}, config);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
+export const createCategoryAction = createAsyncThunk(
+  "categories/create",
+  async ({ name }, { rejectWithValue, getState }) => {
+    try {
+      const token = getState().users?.userAuth?.userInfo?.token;
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const { data } = await axios.post(`${BASE_URL}/categories`, { name }, config);
       return data;
     } catch (error) {
       return rejectWithValue(error?.response?.data);
@@ -42,13 +76,42 @@ const categoriesSlice = createSlice({
     });
     //handle fulfilled state
     builder.addCase(fetchCategoriesAction.fulfilled, (state, action) => {
-      state.categories = action.payload;
+      state.categories = action.payload?.categories || [];
       state.success = true;
       state.loading = false;
       state.error = null;
     });
     //* Handle the rejection
     builder.addCase(fetchCategoriesAction.rejected, (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    });
+
+    builder.addCase(seedDefaultCategoriesAction.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(seedDefaultCategoriesAction.fulfilled, (state, action) => {
+      state.categories = action.payload?.categories || [];
+      state.loading = false;
+      state.error = null;
+    });
+    builder.addCase(seedDefaultCategoriesAction.rejected, (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    });
+
+    builder.addCase(createCategoryAction.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(createCategoryAction.fulfilled, (state, action) => {
+      const created = action.payload?.category;
+      if (created?._id) {
+        state.categories = [created, ...(state.categories || [])];
+      }
+      state.loading = false;
+      state.error = null;
+    });
+    builder.addCase(createCategoryAction.rejected, (state, action) => {
       state.error = action.payload;
       state.loading = false;
     });

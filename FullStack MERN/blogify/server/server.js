@@ -16,8 +16,6 @@ const sendEmail = require("./utils/sendEmail");
 
 //!server
 const app = express();
-//connect to db
-connectDB();
 //cors middleware
 app.use(cors());
 //middleware
@@ -35,4 +33,16 @@ const server = http.createServer(app);
 //?start the server
 
 const Port = process.env.PORT || 8000;
-server.listen(Port, console.log(`Server is Running on PORT ${Port}`));
+
+const startServer = async () => {
+  try {
+    //connect to db
+    await connectDB();
+    server.listen(Port, () => console.log(`Server is Running on PORT ${Port}`));
+  } catch (error) {
+    console.log("Server failed to start due to DB connection error");
+    process.exit(1);
+  }
+};
+
+startServer();

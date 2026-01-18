@@ -72,5 +72,80 @@ Different tools were used to plan and manage the project, such as:
 - redux devtools: see the Redux state in real time, which can be very helpful while debugging application.
 - mongoDB for VS : connect to database and access all data.
 
+## Getting Started
+-----
+
+### Prerequisites
+-----
+- Node.js (recommended: 18+)
+- MongoDB (local or MongoDB Atlas)
+- Cloudinary account (for image uploads)
+- Email SMTP credentials (for verification + password reset emails)
+
+### Environment Variables
+-----
+
+Create a `server/.env` file and set the following variables:
+
+- `PORT` (optional, default `8000`)
+- `MONGO_URL` (required)
+  - Local example: `mongodb://127.0.0.1:27017/blogify`
+  - Atlas example: `mongodb+srv://<user>:<pass>@<cluster>.mongodb.net/<db>?retryWrites=true&w=majority`
+- `JWT_SECRET` (required)
+- `CLOUDINARY_CLOUD_NAME` (required)
+- `CLOUDINARY_APIKEY` (required)
+- `CLOUDINARY_API_SECRET` (required)
+- Email configuration (required for verification/reset)
+  - `EMAIL_HOST`
+  - `EMAIL_PORT`
+  - `EMAIL_USER`
+  - `EMAIL_PASSWORD`
+
+If you see an error like `querySrv ENOTFOUND _mongodb._tcp...`, your `MONGO_URL` is invalid or the hostname cannot be resolved.
+
+### Install & Run
+-----
+
+#### Server
+-----
+From the `server` folder:
+
+- Install: `npm install`
+- Run (prod): `npm run start`
+- Run (dev): `npm run server`
+
+Server runs on `http://localhost:8000` (or `PORT`).
+
+#### Client
+-----
+From the `client` folder:
+
+- Install: `npm install`
+- Run: `npm start`
+
+### Important Notes
+-----
+
+#### Auth Header
+-----
+Protected endpoints require:
+
+`Authorization: Bearer <token>`
+
+#### Default Categories
+-----
+You can seed default categories (Sports, Social Media, Technology, etc.) using:
+
+`POST /api/v1/categories/seed-defaults` (requires login)
+
+The Add Post page can also auto-seed categories when none exist.
+
+#### Email Verification & Uploads
+-----
+Uploading profile/cover images requires a verified account:
+
+- Unverified users will see a warning and uploads are blocked.
+
+
 
 

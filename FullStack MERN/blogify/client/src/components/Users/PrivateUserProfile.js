@@ -6,12 +6,15 @@ import {
 import { ExclamationTriangleIcon } from "@heroicons/react/20/solid";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import UserPosts from "./UserPosts";
 import Followers from "./Followers";
 import SuccessMsg from "../Alert/SuccessMsg";
 export default function PrivateUserProfile() {
   //! Get data from store
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   // get user private profile
   useEffect(() => {
     dispatch(userPrivateProfileAction());
@@ -23,6 +26,20 @@ export default function PrivateUserProfile() {
   const { user, loading, error, profile, userAuth, isEmailSent } = useSelector(
     (state) => state?.users
   );
+
+  const guardVerifiedAccess = (nextPath) => {
+    const isVerified =
+      profile?.user?.isVerified ?? userAuth?.userInfo?.isVerified;
+    if (isVerified) {
+      navigate(nextPath);
+      return;
+    }
+    Swal.fire({
+      icon: "warning",
+      title: "Account not verified",
+      text: "You must verify your email to upload photos and get full access.",
+    });
+  };
   return (
     <>
       {/* success msg */}
@@ -47,12 +64,13 @@ export default function PrivateUserProfile() {
                         alt={profile?.user?.username}
                       />
 
-                      <label
-                        htmlFor="coverImageInput"
+                      <button
+                        type="button"
+                        onClick={() => guardVerifiedAccess("/upload-cover-image")}
                         className="cursor-pointer"
                       >
-                        <AiFillCamera className="absolute top-0  right-0 w-6 h-6 m-4 text-gray-200" />
-                      </label>
+                        <AiFillCamera className="absolute top-0 right-0 w-6 h-6 m-4 text-gray-200" />
+                      </button>
                     </div>
                   </div>
 
@@ -69,12 +87,15 @@ export default function PrivateUserProfile() {
                           alt={profile?.user?.username}
                         />
 
-                        <label
-                          htmlFor="profileImageInput"
+                        <button
+                          type="button"
+                          onClick={() =>
+                            guardVerifiedAccess("/upload-profile-image")
+                          }
                           className="absolute bottom-0 right-0 cursor-pointer"
                         >
                           <AiFillCamera className="w-6 h-6 m-1 text-gray-500" />
-                        </label>
+                        </button>
                       </div>
 
                       <div className="mt-6 sm:flex sm:min-w-0 sm:flex-1 sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
@@ -116,18 +137,17 @@ export default function PrivateUserProfile() {
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"
                               viewBox="0 0 24 24"
-                              stroke-width="1.5"
+                              strokeWidth="1.5"
                               stroke="currentColor"
-                              class="w-6 h-6"
                             >
                               <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                                 d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
                               />
                               <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                               />
                             </svg>

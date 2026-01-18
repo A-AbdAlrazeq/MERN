@@ -19,6 +19,7 @@ const {
   updateUserProfile,
 } = require("../../controllers/Users/UserController");
 const isLogin = require("../../middleware/isLogin");
+const checkAccountVerification = require("../../middleware/isAccountVerified");
 const storage = require("../../utils/fileUpload");
 const usersRouter = express.Router();
 //! file upload middleware
@@ -32,6 +33,7 @@ usersRouter.post("/login", login);
 usersRouter.put(
   "/upload-profile-image",
   isLogin,
+  checkAccountVerification,
   upload.single("file"),
   uploadProfilePicture
 );
@@ -39,6 +41,7 @@ usersRouter.put(
 usersRouter.put(
   "/upload-cover-image",
   isLogin,
+  checkAccountVerification,
   upload.single("file"),
   uploadCoverImage
 );

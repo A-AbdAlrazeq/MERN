@@ -31,7 +31,7 @@ exports.getCategories = asyncHandler(async (req, res) => {
     path: "posts",
     model: "Post",
   });
-  res.status(201).json({
+  res.status(200).json({
     status: "success",
     message: "Categories successfully fetched",
     categories,
@@ -43,8 +43,17 @@ exports.getCategories = asyncHandler(async (req, res) => {
 //@access Private
 
 exports.deleteCategory = asyncHandler(async (req, res) => {
+  const category = await Category.findById(req.params.id);
+  if (!category) {
+    throw Object.assign(new Error("Category not found"), { statusCode: 404 });
+  }
+  const isAuthor = category?.author?.toString() === req.userAuth?._id?.toString();
+  const isAdmin = req.userAuth?.role === "admin";
+  if (!isAuthor && !isAdmin) {
+    throw Object.assign(new Error("Action denied"), { statusCode: 403 });
+  }
   await Category.findByIdAndDelete(req.params.id);
-  res.status(201).json({
+  res.status(200).json({
     status: "success",
     message: "Categories successfully deleted",
   });
@@ -55,6 +64,16 @@ exports.deleteCategory = asyncHandler(async (req, res) => {
 //@access Private
 
 exports.updateCategory = asyncHandler(async (req, res) => {
+  const categoryFound = await Category.findById(req.params.id);
+  if (!categoryFound) {
+    throw Object.assign(new Error("Category not found"), { statusCode: 404 });
+  }
+  const isAuthor =
+    categoryFound?.author?.toString() === req.userAuth?._id?.toString();
+  const isAdmin = req.userAuth?.role === "admin";
+  if (!isAuthor && !isAdmin) {
+    throw Object.assign(new Error("Action denied"), { statusCode: 403 });
+  }
   const category = await Category.findByIdAndUpdate(
     req.params.id,
     {
@@ -65,9 +84,45 @@ exports.updateCategory = asyncHandler(async (req, res) => {
       runValidators: true,
     }
   );
-  res.status(201).json({
+  res.status(200).json({
     status: "success",
     message: "Categories successfully updated",
     category,
+  });
+});
+
+exports.seedDefaultCategories = asyncHandler(async (req, res) => {
+  const defaults = [
+    "Sports",
+    "Social Media",
+    "Technology",
+    "Business",
+    "Health",
+    "Travel",
+    "Food",
+    "Education",
+    "Entertainment",
+    "Lifestyle",
+  ];
+
+  const operations = defaults.map((name) => ({
+    updateOne: {
+      filter: { name },
+      update: {
+        $setOnInsert: {
+          name,
+          author: req.userAuth?._id,
+        },
+      },
+      upsert: true,
+    },
+  }));
+
+  await Category.bulkWrite(operations);
+  const categories = await Category.find({});
+  res.status(200).json({
+    status: "success",
+    message: "Default categories seeded",
+    categories,
   });
 });

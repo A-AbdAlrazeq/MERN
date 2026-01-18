@@ -67,7 +67,7 @@ const PostLists = () => {
             </div>
             {/* Categories */}
             <div className="flex flex-wrap justify-center mb-4">
-              {categories?.categories?.map((cat) => (
+              {categories?.map((cat) => (
                 <button
                   key={cat._id}
                   onClick={() => setCategory(cat._id)}
@@ -86,49 +86,38 @@ const PostLists = () => {
                 </div>
               ) : error ? (
                 <h3 className="text-red-500 text-center">{error?.message}</h3>
-              ) : posts?.post?.length <= 0 ? (
+              ) : !posts?.posts?.length ? (
                 <h1>No Post found</h1>
               ) : (
                 posts?.posts?.map((post) => {
                   return (
                     <Link
                       to={`/posts/${post?._id}`}
+                      key={post?._id}
                       className="w-full md:w-1/2 px-4 mb-8"
                     >
-                      <a
-                        className="block mb-6 overflow-hidden rounded-md"
-                        href="#"
-                      >
+                      <div className="block mb-6 overflow-hidden rounded-md">
                         <img
                           className="w-full"
                           alt="post image"
                           src={post?.image}
                         />
-                      </a>
+                      </div>
                       <div className="mb-4">
-                        <a
-                          className="inline-block py-1 px-3 text-xs leading-5 text-green-500 hover:text-green-600 font-medium uppercase bg-green-100 hover:bg-green-200 rounded-full shadow-sm"
-                          href="#"
-                        >
+                        <span className="inline-block py-1 px-3 text-xs leading-5 text-green-500 hover:text-green-600 font-medium uppercase bg-green-100 hover:bg-green-200 rounded-full shadow-sm">
                           {post?.category?.name}
-                        </a>
+                        </span>
                       </div>
                       <p className="mb-2 text-coolGray-500 font-medium">
                         {new Date(post?.createdAt).toDateString()}
                       </p>
-                      <a
-                        className="inline-block mb-4 text-2xl md:text-3xl leading-tight text-coolGray-800 hover:text-coolGray-900 font-bold hover:underline"
-                        href="#"
-                      >
+                      <div className="inline-block mb-4 text-2xl md:text-3xl leading-tight text-coolGray-800 hover:text-coolGray-900 font-bold hover:underline">
                         {post?.title}
-                      </a>
+                      </div>
                       {/*  <p className="mb-4 text-coolGray-500">
                         {truncatePost(post?.content)}
                       </p> */}
-                      <Link
-                        className="inline-flex items-center text-base md:text-lg text-green-500 hover:text-green-600 font-semibold"
-                        to={`/posts/${post?._id}`}
-                      >
+                      <div className="inline-flex items-center text-base md:text-lg text-green-500 hover:text-green-600 font-semibold">
                         <span className="mr-3">Read Post</span>
                         <svg
                           width={8}
@@ -142,7 +131,7 @@ const PostLists = () => {
                             fill="currentColor"
                           />
                         </svg>
-                      </Link>
+                      </div>
                     </Link>
                   );
                 })

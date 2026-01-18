@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import LoadingComponent from "../Alert/LoadingComponent";
 import ErrorMsg from "../Alert/ErrorMsg";
 import SuccessMsg from "../Alert/SuccessMsg";
@@ -8,6 +9,7 @@ import { uploadProfileImageAction } from "../../redux/slices/users/usersSlices";
 const UploadProfileImage = () => {
   //fetch categories
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   //! Error state
   const [errors, setErrors] = useState({});
 
@@ -45,15 +47,18 @@ const UploadProfileImage = () => {
     const errors = validateForm(formData);
     setErrors(errors);
     if (Object.keys(errors).length === 0) {
-      dispatch(uploadProfileImageAction(formData));
-      e.preventDefault();
+      dispatch(uploadProfileImageAction(formData)).then((result) => {
+        if (result?.meta?.requestStatus === "fulfilled") {
+          setTimeout(() => navigate("/user-profile"), 600);
+        }
+      });
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <form onSubmit={handleSubmit} className="w-full lg:w-1/2">
-        <div className="flex flex-col items-center p-10 xl:px-24 xl:pb-12 bg-white lg:max-w-xl lg:ml-auto rounded-4xl shadow-2xl">
+    <div className="min-h-[calc(100vh-80px)] flex items-center justify-center px-4 py-10 bg-gradient-to-br from-green-50 via-white to-emerald-50">
+      <form onSubmit={handleSubmit} className="w-full max-w-2xl">
+        <div className="flex flex-col items-center p-8 md:p-10 bg-white rounded-2xl shadow-xl border border-coolGray-100">
           <h2 className="mb-4 text-2xl md:text-3xl text-coolGray-900 font-bold text-center">
             Upload Profile Image
           </h2>

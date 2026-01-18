@@ -18,7 +18,7 @@ const UpdatePost = () => {
   //get data from store
   const { categories } = useSelector((state) => state?.categories);
 
-  const options = categories?.categories?.map((category) => {
+  const options = categories?.map((category) => {
     return {
       value: category?._id,
       label: category?.name,
@@ -75,9 +75,9 @@ const UpdatePost = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <form onSubmit={handleSubmit} className="w-full lg:w-1/2">
-        <div className="flex flex-col items-center p-10 xl:px-24 xl:pb-12 bg-white lg:max-w-xl lg:ml-auto rounded-4xl shadow-2xl">
+    <div className="min-h-[calc(100vh-80px)] flex items-center justify-center px-4 py-10 bg-gradient-to-br from-green-50 via-white to-emerald-50">
+      <form onSubmit={handleSubmit} className="w-full max-w-2xl">
+        <div className="flex flex-col items-center p-8 md:p-10 bg-white rounded-2xl shadow-xl border border-coolGray-100">
           <h2 className="mb-4 text-2xl md:text-3xl text-coolGray-900 font-bold text-center">
             Update Post
           </h2>

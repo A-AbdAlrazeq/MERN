@@ -15,6 +15,7 @@ const AddComment = ({ postId, comments }) => {
   };
   //! get comment from store
   const { success, loading } = useSelector((state) => state?.comments);
+  const { userAuth } = useSelector((state) => state?.users);
   console.log(loading);
   //reload
   useEffect(() => {
@@ -40,9 +41,12 @@ const AddComment = ({ postId, comments }) => {
             <div className="flex space-x-4">
               <div className="flex-none">
                 <img
-                  src="https://via.placeholder.com/50"
+                  src={
+                    userAuth?.userInfo?.profilePicture ||
+                    "https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375_1280.png"
+                  }
                   alt="avatar"
-                  className="w-12 h-12 rounded-full"
+                  className="w-12 h-12 rounded-full object-cover"
                 />
               </div>
               <div className="flex-grow">

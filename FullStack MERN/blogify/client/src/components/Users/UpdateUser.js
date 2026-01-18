@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineUser, AiOutlineMail } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import "tailwindcss/tailwind.css";
 import { updateUserProfileAction } from "../../redux/slices/users/usersSlices";
 import LoadingComponent from "../Alert/LoadingComponent";
@@ -9,6 +10,7 @@ import SuccessMsg from "../Alert/SuccessMsg";
 
 const UpdateUser = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { loading, error, userAuth, isUpdated } = useSelector(
     (state) => state?.users
   );
@@ -33,7 +35,10 @@ const UpdateUser = () => {
           email: formData.email,
         })
       )
-        .then(() => {
+        .then((result) => {
+          if (result?.meta?.requestStatus === "fulfilled") {
+            setTimeout(() => navigate("/user-profile"), 600);
+          }
           // If the update was successful, update localStorage
           const updatedUserInfo = {
             ...JSON.parse(localStorage.getItem("userInfo")),
@@ -55,19 +60,15 @@ const UpdateUser = () => {
   };
 
   useEffect(() => {
-    if (isUpdated) {
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
-    }
+    if (isUpdated) return;
   }, [isUpdated]);
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col items-center justify-center min-h-screen bg-gray-50"
+      className="flex flex-col items-center justify-center min-h-[calc(100vh-80px)] px-4 py-10 bg-gradient-to-br from-green-50 via-white to-emerald-50"
     >
-      <div className="w-96 p-6 bg-white rounded-xl shadow-md">
+      <div className="w-full max-w-xl p-6 md:p-8 bg-white rounded-2xl shadow-xl border border-coolGray-100">
         <h1 className="text-3xl font-bold text-gray-700 text-center mb-6">
           Update your Profile
         </h1>

@@ -1,5 +1,6 @@
 const expressAsyncHandler = require("express-async-handler");
 const asyncHandler = require("express-async-handler");
+const mongoose = require("mongoose");
 const Post = require("../../models/Post/Post");
 const User = require("../../models/User/User");
 const Category = require("../../models/Category/Category");
@@ -44,7 +45,7 @@ exports.createPost = asyncHandler(async (req, res) => {
 
   //* Push post into category
   await Category.findByIdAndUpdate(
-    req?.userAuth?._id,
+    categoryId,
     {
       $push: { posts: post._id },
     },
@@ -83,6 +84,8 @@ exports.getPosts = asyncHandler(async (req, res) => {
     $or: [
       {
         scheduledPublish: { $lte: currentTime },
+      },
+      {
         scheduledPublish: null,
       },
     ],
@@ -126,7 +129,7 @@ exports.getPosts = asyncHandler(async (req, res) => {
       limit,
     };
   }
-  res.status(201).json({
+  res.status(200).json({
     status: "success",
     message: "Posts successfully fetched",
     posts,
@@ -142,7 +145,7 @@ exports.getPublicPosts = asyncHandler(async (req, res) => {
     .sort({ createdAt: -1 })
     .limit(4)
     .populate("category");
-  res.status(201).json({
+  res.status(200).json({
     status: "success",
     message: "Posts successfully fetched",
     posts,
@@ -152,6 +155,9 @@ exports.getPublicPosts = asyncHandler(async (req, res) => {
 //@route GET /api/v1/posts/:id
 //@access public
 exports.getPost = asyncHandler(async (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    throw Object.assign(new Error("Invalid post id"), { statusCode: 400 });
+  }
   const post = await Post.findById(req.params.id)
     .populate("author")
     .populate("category")
@@ -160,10 +166,13 @@ exports.getPost = asyncHandler(async (req, res) => {
       model: "Comment",
       populate: {
         path: "author",
-        select: "username",
+        select: "username profilePicture",
       },
     });
-  res.status(201).json({
+  if (!post) {
+    throw Object.assign(new Error("Post not found"), { statusCode: 404 });
+  }
+  res.status(200).json({
     status: "success",
     message: "Post successfully fetched",
     post,
@@ -202,13 +211,13 @@ exports.updatePost = asyncHandler(async (req, res) => {
     throw new Error("Post not found");
   }
   //! image update
-  const { title, category, content } = req.body;
+  const { title, category, categoryId, content } = req.body;
   const post = await Post.findByIdAndUpdate(
     id,
     {
       image: req?.file?.path ? req?.file?.path : postFound?.image,
       title: title ? title : postFound?.title,
-      category: category ? category : postFound?.category,
+      category: categoryId ? categoryId : category ? category : postFound?.category,
       content: content ? content : postFound?.content,
     },
     {
@@ -373,5 +382,5 @@ exports.postViewCount = expressAsyncHandler(async (req, res) => {
     { new: true }
   ).populate("author");
   await post.save();
-  res.status(200).json({ message: "Post liked successfully.", post });
+  res.status(200).json({ message: "Post view recorded successfully.", post });
 });

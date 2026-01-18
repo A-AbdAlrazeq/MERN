@@ -38,8 +38,17 @@ exports.createComment = asyncHandler(async (req, res) => {
 //@access Private
 
 exports.deleteComment = asyncHandler(async (req, res) => {
+  const comment = await Comment.findById(req.params.id);
+  if (!comment) {
+    throw Object.assign(new Error("Comment not found"), { statusCode: 404 });
+  }
+  const isAuthor = comment?.author?.toString() === req.userAuth?._id?.toString();
+  const isAdmin = req.userAuth?.role === "admin";
+  if (!isAuthor && !isAdmin) {
+    throw Object.assign(new Error("Action denied"), { statusCode: 403 });
+  }
   await Comment.findByIdAndDelete(req.params.id);
-  res.status(201).json({
+  res.status(200).json({
     status: "success",
     message: "Comment successfully deleted",
   });
@@ -50,6 +59,16 @@ exports.deleteComment = asyncHandler(async (req, res) => {
 //@access Private
 
 exports.updateComment = asyncHandler(async (req, res) => {
+  const commentFound = await Comment.findById(req.params.id);
+  if (!commentFound) {
+    throw Object.assign(new Error("Comment not found"), { statusCode: 404 });
+  }
+  const isAuthor =
+    commentFound?.author?.toString() === req.userAuth?._id?.toString();
+  const isAdmin = req.userAuth?.role === "admin";
+  if (!isAuthor && !isAdmin) {
+    throw Object.assign(new Error("Action denied"), { statusCode: 403 });
+  }
   const comment = await Comment.findByIdAndUpdate(
     req.params.id,
     {
@@ -60,7 +79,7 @@ exports.updateComment = asyncHandler(async (req, res) => {
       runValidators: true,
     }
   );
-  res.status(201).json({
+  res.status(200).json({
     status: "success",
     message: "comment successfully updated",
     comment,

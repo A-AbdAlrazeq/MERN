@@ -15,13 +15,13 @@ exports.register = asyncHandler(async (req, res) => {
   //! Check if user exists
   const user = await User.findOne({ username });
   if (user) {
-    throw new Error("User Already Exists");
+    throw Object.assign(new Error("User Already Exists"), { statusCode: 400 });
   }
   //Register new user
   //! Check if email exists
   const Email = await User.findOne({ email });
   if (Email) {
-    throw new Error("email Already used");
+    throw Object.assign(new Error("email Already used"), { statusCode: 400 });
   }
   const newUser = new User({
     username,
@@ -29,7 +29,9 @@ exports.register = asyncHandler(async (req, res) => {
     password,
   });
   if (password == "" && email != "" && username != "") {
-    throw new Error("password : Path 'password' is required");
+    throw Object.assign(new Error("password : Path 'password' is required"), {
+      statusCode: 400,
+    });
   }
   const salt = await bcrypt.genSalt(10);
   newUser.password = await bcrypt.hash(password, salt);
@@ -38,11 +40,14 @@ exports.register = asyncHandler(async (req, res) => {
   res.status(201).json({
     status: "success",
     message: "User Registered Successfully",
-    // _id: newUser?._id,
-    // username: newUser?.username,
-    // email: newUser?.email,
-    // role: newUser?.role,
-    newUser,
+    newUser: {
+      _id: newUser?._id,
+      username: newUser?.username,
+      email: newUser?.email,
+      role: newUser?.role,
+      isVerified: newUser?.isVerified,
+      profilePicture: newUser?.profilePicture,
+    },
   });
 });
 
@@ -56,15 +61,16 @@ exports.login = asyncHandler(async (req, res) => {
   //! Check if exists
   const user = await User.findOne({ username });
   if (!user) {
-    throw new Error("Invalid login credentials");
+    throw Object.assign(new Error("Invalid login credentials"), { statusCode: 401 });
   }
   //compare the hashed password with the one the request
   const isMatched = await bcrypt.compare(password, user?.password);
   if (!isMatched) {
-    throw new Error("Invalid login credentials");
+    throw Object.assign(new Error("Invalid login credentials"), { statusCode: 401 });
   }
   //Update the last login
   user.lastLogin = new Date();
+  await user.save();
   res.json({
     status: "success",
     email: user?.email,

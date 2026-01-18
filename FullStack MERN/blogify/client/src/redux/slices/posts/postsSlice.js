@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import BASE_URL from "../../../utils/baseURL";
 import {
   resetErrorAction,
   resetSuccessAction,
@@ -20,9 +21,7 @@ export const fetchPublicPostsAction = createAsyncThunk(
   async (payload, { rejectWithValue, getState, dispatch }) => {
     //make request
     try {
-      const { data } = await axios.get(
-        `http://localhost:8000/api/v1/posts/public`
-      );
+      const { data } = await axios.get(`${BASE_URL}/posts/public`);
       return data;
     } catch (error) {
       return rejectWithValue(error?.response?.data);
@@ -44,14 +43,10 @@ export const addPostAction = createAsyncThunk(
       const token = getState().users?.userAuth?.userInfo?.token;
       const config = {
         headers: {
-          Authorization: `Abd ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       };
-      const { data } = await axios.post(
-        `http://localhost:8000/api/v1/posts`,
-        formData,
-        config
-      );
+      const { data } = await axios.post(`${BASE_URL}/posts`, formData, config);
       return data;
     } catch (error) {
       return rejectWithValue(error?.response?.data);
@@ -64,9 +59,7 @@ export const getPostAction = createAsyncThunk(
   async (postId, { rejectWithValue, getState, dispatch }) => {
     //make request
     try {
-      const { data } = await axios.get(
-        `http://localhost:8000/api/v1/posts/${postId}`
-      );
+      const { data } = await axios.get(`${BASE_URL}/posts/${postId}`);
       return data;
     } catch (error) {
       return rejectWithValue(error?.response?.data);
@@ -85,11 +78,11 @@ export const fetchPrivatePostsAction = createAsyncThunk(
       const token = getState().users?.userAuth?.userInfo?.token;
       const config = {
         headers: {
-          Authorization: `Abd ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       };
       const { data } = await axios.get(
-        `http://localhost:8000/api/v1/posts?page=${page}&limit=${limit}&searchTerm=${searchTerm}&category=${category}`,
+        `${BASE_URL}/posts?page=${page}&limit=${limit}&searchTerm=${searchTerm}&category=${category}`,
         config
       );
       return data;
@@ -107,11 +100,11 @@ export const deletePostAction = createAsyncThunk(
       const token = getState().users?.userAuth?.userInfo?.token;
       const config = {
         headers: {
-          Authorization: `Abd ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       };
       const { data } = await axios.delete(
-        `http://localhost:8000/api/v1/posts/${postId}`,
+        `${BASE_URL}/posts/${postId}`,
         config
       );
       return data;
@@ -135,11 +128,11 @@ export const updatePostAction = createAsyncThunk(
       const token = getState().users?.userAuth?.userInfo?.token;
       const config = {
         headers: {
-          Authorization: `Abd ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       };
       const { data } = await axios.put(
-        `http://localhost:8000/api/v1/posts/${payload?.postId}`,
+        `${BASE_URL}/posts/${payload?.postId}`,
         formData,
         config
       );
@@ -158,11 +151,11 @@ export const likePostAction = createAsyncThunk(
       const token = getState().users?.userAuth?.userInfo?.token;
       const config = {
         headers: {
-          Authorization: `Abd ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       };
       const { data } = await axios.put(
-        `http://localhost:8000/api/v1/posts/likes/${postId}`,
+        `${BASE_URL}/posts/likes/${postId}`,
         {},
         config
       );
@@ -181,11 +174,11 @@ export const dislikePostAction = createAsyncThunk(
       const token = getState().users?.userAuth?.userInfo?.token;
       const config = {
         headers: {
-          Authorization: `Abd ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       };
       const { data } = await axios.put(
-        `http://localhost:8000/api/v1/posts/dislikes/${postId}`,
+        `${BASE_URL}/posts/dislikes/${postId}`,
         {},
         config
       );
@@ -204,11 +197,11 @@ export const clapPostAction = createAsyncThunk(
       const token = getState().users?.userAuth?.userInfo?.token;
       const config = {
         headers: {
-          Authorization: `Abd ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       };
       const { data } = await axios.put(
-        `http://localhost:8000/api/v1/posts/claps/${postId}`,
+        `${BASE_URL}/posts/claps/${postId}`,
         {},
         config
       );
@@ -227,11 +220,11 @@ export const posViewsCountAction = createAsyncThunk(
       const token = getState().users?.userAuth?.userInfo?.token;
       const config = {
         headers: {
-          Authorization: `Abd ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       };
       const { data } = await axios.put(
-        `http://localhost:8000/api/v1/posts/${postId}/post-view-count`,
+        `${BASE_URL}/posts/${postId}/post-view-count`,
         {},
         config
       );
@@ -253,11 +246,11 @@ export const schedulePostAction = createAsyncThunk(
       const token = getState().users?.userAuth?.userInfo?.token;
       const config = {
         headers: {
-          Authorization: `Abd ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       };
       const { data } = await axios.put(
-        `http://localhost:8000/api/v1/posts/schedule/${postId}`,
+        `${BASE_URL}/posts/schedule/${postId}`,
         {
           scheduledPublish,
         },

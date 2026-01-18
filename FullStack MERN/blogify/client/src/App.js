@@ -31,7 +31,14 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Homepage />}></Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/register" element={<Register />}></Route>
+        <Route
+          path="/register"
+          element={
+            <div className="min-h-[calc(100vh-80px)] flex items-center justify-center px-4 py-10 bg-gradient-to-br from-green-50 via-white to-emerald-50">
+              <Register />
+            </div>
+          }
+        ></Route>
         {/* Public user Profile */}
         <Route
           path="/user-public-profile/:userId"

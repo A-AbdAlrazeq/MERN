@@ -1,4 +1,4 @@
-const { createAsyncThunk } = require("@reduxjs/toolkit");
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
 //! Reset Success action
 export const resetSuccessAction = createAsyncThunk(
